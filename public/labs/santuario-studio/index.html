@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santuário — Studio de Pilates & Yoga</title>
+  <meta name="description" content="Santuário Studio de Pilates & Yoga. Encontre seu centro. Aulas personalizadas de Pilates Clássico, Vinyasa Flow e Meditação Guiada.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sand: #F5F1EB;
+      --sage: #6B8E7B;
+      --sage-dark: #4A6B5A;
+      --sage-light: #A8C4B0;
+      --charcoal: #2C2C2C;
+      --warm-white: #FDFCFA;
+      --gold-soft: #C4A882;
+      --stone: #8C8578;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--sand);
+      color: var(--charcoal);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 28px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav.scrolled {
+      background: rgba(253, 252, 250, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      padding: 16px 56px;
+      box-shadow: 0 1px 0 rgba(44,44,44,0.04);
+    }
+
+    .nav.scrolled .logo,
+    .nav.scrolled .nav-link { color: var(--charcoal); }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--warm-white);
+      text-decoration: none;
+      transition: color 0.5s;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--warm-white);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.4s;
+      cursor: pointer;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      width: 0; height: 1px;
+      background: currentColor;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after { width: 100%; }
+
+    .nav-cta {
+      padding: 12px 32px;
+      border: 1px solid currentColor;
+      background: transparent;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--warm-white);
+      cursor: pointer;
+      transition: all 0.5s;
+    }
+
+    .nav.scrolled .nav-cta {
+      color: var(--charcoal);
+      border-color: var(--charcoal);
+    }
+
+    .nav-cta:hover {
+      background: var(--sage);
+      color: var(--warm-white);
+      border-color: var(--sage);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(44,44,44,0.15) 0%,
+        rgba(107,142,123,0.25) 40%,
+        rgba(44,44,44,0.55) 100%
+      );
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: var(--warm-white);
+      max-width: 800px;
+      padding: 0 32px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1.2s 0.4s forwards;
+      color: var(--sage-light);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.08;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1.4s 0.7s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--sage-light);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 480px;
+      margin: 0 auto 44px;
+      opacity: 0;
+      animation: fadeUp 1.2s 1s forwards;
+      color: rgba(253,252,250,0.8);
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 1s 1.3s forwards;
+    }
+
+    .hero-btn-primary {
+      padding: 16px 40px;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .hero-btn-primary:hover {
+      background: var(--sage);
+      color: var(--warm-white);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 50px rgba(107,142,123,0.3);
+    }
+
+    .hero-btn-secondary {
+      padding: 16px 40px;
+      background: transparent;
+      color: var(--warm-white);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(253,252,250,0.4);
+      cursor: pointer;
+      transition: all 0.5s;
+    }
+
+    .hero-btn-secondary:hover {
+      background: rgba(253,252,250,0.1);
+      border-color: var(--warm-white);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeUp 1s 2s forwards;
+    }
+
+    .scroll-hint span {
+      font-size: 0.6rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(253,252,250,0.5);
+    }
+
+    .scroll-hint-line {
+      width: 1px;
+      height: 56px;
+      background: linear-gradient(to bottom, rgba(253,252,250,0.5), transparent);
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 140px 56px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--charcoal);
+    }
+
+    .section-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--sage);
+    }
+
+    /* ===== PHILOSOPHY ===== */
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .philosophy-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .philosophy-image img {
+      width: 100%;
+      height: 650px;
+      object-fit: cover;
+      transition: all 1s;
+    }
+
+    .philosophy-image:hover img {
+      transform: scale(1.04);
+    }
+
+    .philosophy-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 50%, rgba(107,142,123,0.1));
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .philosophy-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--stone);
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+
+    .philosophy-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--sage-dark);
+      line-height: 1.6;
+      padding-left: 24px;
+      border-left: 2px solid var(--sage-light);
+      margin-top: 40px;
+    }
+
+    /* ===== MODALITIES ===== */
+    .modalities-section {
+      background: var(--warm-white);
+      padding: 140px 56px;
+    }
+
+    .modalities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .modality-card {
+      padding: 56px 40px;
+      border: 1px solid rgba(107,142,123,0.1);
+      text-align: center;
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modality-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--sage);
+      transform: scaleX(0);
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .modality-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .modality-card:hover {
+      border-color: rgba(107,142,123,0.2);
+      transform: translateY(-6px);
+      box-shadow: 0 30px 60px rgba(107,142,123,0.08);
+    }
+
+    .modality-icon {
+      font-size: 2.2rem;
+      margin-bottom: 28px;
+      opacity: 0.7;
+    }
+
+    .modality-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 14px;
+      color: var(--charcoal);
+    }
+
+    .modality-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--stone);
+      font-weight: 300;
+    }
+
+    /* ===== PLANS ===== */
+    .plans-section {
+      padding: 140px 56px;
+      background: var(--charcoal);
+      color: var(--warm-white);
+    }
+
+    .plans-section .section-eyebrow { color: var(--sage-light); }
+    .plans-section .section-title { color: var(--warm-white); }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .plan-card {
+      background: rgba(253,252,250,0.03);
+      border: 1px solid rgba(253,252,250,0.06);
+      padding: 52px 40px;
+      text-align: center;
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+    }
+
+    .plan-card.featured {
+      background: rgba(107,142,123,0.08);
+      border-color: rgba(107,142,123,0.2);
+    }
+
+    .plan-card.featured::before {
+      content: 'Mais Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--sage);
+      color: var(--warm-white);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 20px;
+    }
+
+    /* BREATHING ANIMATION */
+    .plan-card {
+      animation: breathe-card 4s ease-in-out infinite;
+    }
+
+    .plan-card:nth-child(2) { animation-delay: 1.3s; }
+    .plan-card:nth-child(3) { animation-delay: 2.6s; }
+
+    @keyframes breathe-card {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+    }
+
+    .plan-card:hover {
+      animation: none;
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(107,142,123,0.3);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    }
+
+    .plan-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .plan-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 300;
+      color: var(--gold-soft);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .plan-price span {
+      font-size: 0.9rem;
+      font-family: 'Jost', sans-serif;
+      color: rgba(253,252,250,0.4);
+      font-weight: 300;
+    }
+
+    .plan-period {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(253,252,250,0.4);
+      margin-bottom: 36px;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 40px;
+    }
+
+    .plan-features li {
+      font-size: 0.88rem;
+      color: rgba(253,252,250,0.6);
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(253,252,250,0.05);
+      font-weight: 300;
+    }
+
+    .plan-features li:last-child { border-bottom: none; }
+
+    .plan-btn {
+      width: 100%;
+      padding: 16px;
+      background: transparent;
+      border: 1px solid rgba(253,252,250,0.2);
+      color: var(--warm-white);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s;
+    }
+
+    .plan-btn:hover {
+      background: var(--sage);
+      border-color: var(--sage);
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-section {
+      padding: 140px 56px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .testimonial-card {
+      padding: 48px 36px;
+      border: 1px solid rgba(107,142,123,0.1);
+      transition: all 0.5s;
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 36px; right: 36px;
+      height: 2px;
+      background: var(--sage-light);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .testimonial-card:hover::before { opacity: 1; }
+
+    .testimonial-card:hover {
+      border-color: rgba(107,142,123,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(107,142,123,0.06);
+    }
+
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--stone);
+      margin-bottom: 32px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .testimonial-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .testimonial-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    .testimonial-role {
+      font-size: 0.72rem;
+      color: var(--stone);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      padding: 120px 56px;
+      background: var(--sage);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(253,252,250,0.05) 0%, transparent 60%);
+      animation: rotate-slow 30s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotate-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-section .section-title {
+      color: var(--warm-white);
+      margin-bottom: 20px;
+    }
+
+    .cta-desc {
+      font-size: 1rem;
+      color: rgba(253,252,250,0.8);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .cta-btn {
+      padding: 18px 48px;
+      background: var(--warm-white);
+      color: var(--sage-dark);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.5s;
+      display: inline-block;
+    }
+
+    .cta-btn:hover {
+      background: var(--charcoal);
+      color: var(--warm-white);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--charcoal);
+      color: var(--warm-white);
+      padding: 80px 56px 40px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(253,252,250,0.4);
+      margin-bottom: 48px;
+      font-style: italic;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-links a {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(253,252,250,0.4);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--sage-light); }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: rgba(253,252,250,0.25);
+      padding-top: 32px;
+      border-top: 1px solid rgba(253,252,250,0.05);
+    }
+
+    /* ===== BOOKING MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(44,44,44,0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--warm-white);
+      width: 100%;
+      max-width: 520px;
+      padding: 64px 56px;
+      position: relative;
+      transform: translateY(40px) scale(0.97);
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      width: 40px; height: 40px;
+      border: 1px solid rgba(44,44,44,0.1);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .modal-close:hover {
+      background: var(--charcoal);
+      border-color: var(--charcoal);
+    }
+
+    .modal-close:hover svg { stroke: var(--warm-white); }
+
+    .modal-close svg {
+      width: 16px; height: 16px;
+      stroke: var(--charcoal);
+      transition: stroke 0.3s;
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .modal-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+      color: var(--charcoal);
+    }
+
+    .modal-header p {
+      font-size: 0.85rem;
+      color: var(--stone);
+      font-weight: 300;
+    }
+
+    .form-group { margin-bottom: 28px; }
+
+    .form-label {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: var(--charcoal);
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 16px 0;
+      border: none;
+      border-bottom: 1px solid rgba(44,44,44,0.12);
+      background: transparent;
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.4s;
+    }
+
+    .form-input:focus, .form-select:focus { border-bottom-color: var(--sage); }
+
+    .form-input::placeholder {
+      color: rgba(44,44,44,0.3);
+      font-weight: 300;
+    }
+
+    .form-select {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 18px;
+      background: var(--charcoal);
+      color: var(--warm-white);
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: all 0.4s;
+    }
+
+    .form-submit:hover {
+      background: var(--sage);
+      letter-spacing: 4px;
+    }
+
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .mobile-menu-btn svg {
+      width: 24px; height: 24px;
+      stroke: var(--warm-white);
+      transition: stroke 0.4s;
+    }
+
+    .nav.scrolled .mobile-menu-btn svg { stroke: var(--charcoal); }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      background: var(--charcoal);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+
+    .mobile-nav.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--warm-white);
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+
+    .mobile-nav-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-nav-close svg {
+      width: 28px; height: 28px;
+      stroke: var(--warm-white);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+      50% { opacity: 0.8; transform: scaleY(1); }
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .philosophy-grid { grid-template-columns: 1fr; gap: 60px; }
+      .modalities-grid { grid-template-columns: repeat(2, 1fr); }
+      .plans-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .section { padding: 80px 24px; }
+      .modalities-section { padding: 80px 24px; }
+      .plans-section { padding: 80px 24px; }
+      .testimonials-section { padding: 80px 24px; }
+      .modalities-grid,
+      .plans-grid,
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .hero-cta-group { flex-direction: column; align-items: center; }
+      .nav { padding: 20px 24px; }
+      .nav.scrolled { padding: 14px 24px; }
+      .modal { padding: 48px 28px; }
+      .philosophy-image img { height: 400px; }
+      .cta-section { padding: 80px 24px; }
+      .footer { padding: 60px 24px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="navbar">
+    <a href="#" class="logo">Santuário</a>
+    <div class="nav-links">
+      <a href="#philosophy" class="nav-link">Filosofia</a>
+      <a href="#modalities" class="nav-link">Modalidades</a>
+      <a href="#plans" class="nav-link">Planos</a>
+      <a href="#testimonials" class="nav-link">Depoimentos</a>
+      <button class="nav-cta" onclick="openModal()">Agendar Aula</button>
+    </div>
+    <button class="mobile-menu-btn" onclick="openMobileNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="closeMobileNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <a href="#philosophy" onclick="closeMobileNav()">Filosofia</a>
+    <a href="#modalities" onclick="closeMobileNav()">Modalidades</a>
+    <a href="#plans" onclick="closeMobileNav()">Planos</a>
+    <a href="#testimonials" onclick="closeMobileNav()">Depoimentos</a>
+    <a href="#" onclick="closeMobileNav(); openModal(); return false;">Agendar Aula</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1920&q=80">
+      <source src="https://videos.pexels.com/video-files/5087785/5087785-hd_1920_1080_24fps.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Studio de Pilates & Yoga</p>
+      <h1 class="hero-title">Encontre seu<br><em>centro</em></h1>
+      <p class="hero-desc">Um espaço onde o movimento encontra a quietude. Aulas personalizadas de Pilates e Yoga para quem busca equilíbrio, força e leveza no dia a dia.</p>
+      <div class="hero-cta-group">
+        <a href="#plans" class="hero-btn-primary">Começar Agora</a>
+        <a href="#modalities" class="hero-btn-secondary">Conhecer Modalidades</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Descer</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="section" id="philosophy">
+    <div class="philosophy-grid">
+      <div class="philosophy-image reveal">
+        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80" alt="Yoga no studio">
+      </div>
+      <div class="philosophy-text reveal">
+        <p class="section-eyebrow">Nossa Filosofia</p>
+        <h2 class="section-title">Corpo em <em>movimento</em>,<br>mente em paz</h2>
+        <p>O Santuário nasceu da crença de que o bem-estar verdadeiro vem da conexão entre corpo e mente. Nosso método une a precisão do Pilates com a fluidez do Yoga, criando uma experiência única de transformação.</p>
+        <p>Cada aula é um convite para sair do ritmo acelerado da cidade e entrar em um espaço de calma intencional. Nossos instrutores são certificados internacionalmente e dedicados a guiar você com atenção individualizada.</p>
+        <div class="philosophy-quote">
+          "O movimento é a medicina do corpo, e a quietude é a medicina da alma."
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODALITIES -->
+  <section class="modalities-section" id="modalities">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">O Que Oferecemos</p>
+      <h2 class="section-title">Três caminhos,<br>um só <em>propósito</em></h2>
+    </div>
+    <div class="modalities-grid">
+      <div class="modality-card reveal">
+        <div class="modality-icon">🧘</div>
+        <h3 class="modality-title">Pilates Clássico</h3>
+        <p class="modality-desc">Método original com aparelhos. Fortalecimento profundo, alinhamento postural e controle do movimento com precisão milimétrica.</p>
+      </div>
+      <div class="modality-card reveal">
+        <div class="modality-icon">🌿</div>
+        <h3 class="modality-title">Vinyasa Flow</h3>
+        <p class="modality-desc">Sequências fluidas que sincronizam respiração e movimento. Aulas dinâmicas que constroem força, flexibilidade e presença mental.</p>
+      </div>
+      <div class="modality-card reveal">
+        <div class="modality-icon">✨</div>
+        <h3 class="modality-title">Meditação Guiada</h3>
+        <p class="modality-desc">Sessões de mindfulness e respiração consciente para reduzir estresse, melhorar o sono e cultivar clareza mental no dia a dia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="plans-section" id="plans">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Invista em Você</p>
+      <h2 class="section-title">Planos que <em>respiram</em><br>com seu ritmo</h2>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card reveal">
+        <h3 class="plan-name">Iniciante</h3>
+        <div class="plan-price">R$ 297<span>/mês</span></div>
+        <p class="plan-period">4 aulas por mês</p>
+        <ul class="plan-features">
+          <li>1 aula semanal</li>
+          <li>Pilates ou Yoga</li>
+          <li>Avaliação postural</li>
+          <li>Acesso ao app</li>
+        </ul>
+        <button class="plan-btn" onclick="openModal()">Escolher Plano</button>
+      </div>
+      <div class="plan-card featured reveal">
+        <h3 class="plan-name">Equilíbrio</h3>
+        <div class="plan-price">R$ 497<span>/mês</span></div>
+        <p class="plan-period">8 aulas por mês</p>
+        <ul class="plan-features">
+          <li>2 aulas semanais</li>
+          <li>Pilates + Yoga</li>
+          <li>Avaliação mensal</li>
+          <li>Acesso ao app</li>
+          <li>1 aula de meditação</li>
+        </ul>
+        <button class="plan-btn" onclick="openModal()">Escolher Plano</button>
+      </div>
+      <div class="plan-card reveal">
+        <h3 class="plan-name">Imersão</h3>
+        <div class="plan-price">R$ 797<span>/mês</span></div>
+        <p class="plan-period">Aulas ilimitadas</p>
+        <ul class="plan-features">
+          <li>Aulas ilimitadas</li>
+          <li>Todas as modalidades</li>
+          <li>Avaliação quinzenal</li>
+          <li>Acesso ao app</li>
+          <li>Retiros mensais</li>
+        </ul>
+        <button class="plan-btn" onclick="openModal()">Escolher Plano</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Depoimentos</p>
+      <h2 class="section-title">Vozes do <em>santuário</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">Depois de anos com dores nas costas, o Pilates do Santuário mudou minha postura e minha vida. Os instrutores têm uma atenção que não encontrei em lugar nenhum.</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Ana Paula" class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Ana Paula Mendes</div>
+            <div class="testimonial-role">Arquiteta</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">O Vinyasa Flow é a única hora do dia em que me sinto verdadeiramente presente. O ambiente do studio transmite uma paz que começa antes mesmo da aula.</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Bruno Costa" class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Bruno Costa</div>
+            <div class="testimonial-role">Empreendedor</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">Minha ansiedade diminuiu drasticamente desde que comecei as aulas de meditação. O Santuário é muito mais que um studio — é um refúgio.</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face" alt="Camila Rocha" class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Camila Rocha</div>
+            <div class="testimonial-role">Médica</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-content reveal">
+      <p class="section-eyebrow">Primeira Aula</p>
+      <h2 class="section-title">Seu primeiro passo<br>é <em>gratuito</em></h2>
+      <p class="cta-desc">Agende uma aula experimental sem compromisso. Conheça nosso espaço, nossos instrutores e descubra qual modalidade ressoa com você.</p>
+      <button class="cta-btn" onclick="openModal()">Agendar Aula Experimental</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">Santuário</div>
+    <p class="footer-tagline">"Respire. Mova-se. Sinta."</p>
+    <div class="footer-links">
+      <a href="#philosophy">Filosofia</a>
+      <a href="#modalities">Modalidades</a>
+      <a href="#plans">Planos</a>
+      <a href="#" onclick="openModal(); return false;">Agendar</a>
+    </div>
+    <p class="footer-copy">© 2026 Santuário Studio. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="modal-header">
+        <h2>Agende sua aula</h2>
+        <p>Preencha seus dados e entraremos em contato</p>
+      </div>
+      <form onsubmit="event.preventDefault(); closeModal(); alert('Obrigado! Entraremos em contato em breve para confirmar sua aula.');">
+        <div class="form-group">
+          <label class="form-label">Nome completo</label>
+          <input type="text" class="form-input" placeholder="Seu nome" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" placeholder="seu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telefone</label>
+          <input type="tel" class="form-input" placeholder="(11) 99999-9999" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Modalidade de interesse</label>
+          <select class="form-select" required>
+            <option value="">Selecione...</option>
+            <option value="pilates">Pilates Clássico</option>
+            <option value="vinyasa">Vinyasa Flow</option>
+            <option value="meditacao">Meditação Guiada</option>
+            <option value="experimental">Aula Experimental</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">Agendar Aula</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Modal
+    function openModal() {
+      document.getElementById('bookingModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('bookingModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('bookingModal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+
+    // Mobile Nav
+    function openMobileNav() {
+      document.getElementById('mobileNav').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      document.getElementById('mobileNav').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeMobileNav();
+      }
+    });
+  </script>
+
+<!-- selo de demonstracao (injetado pelo portfolio) -->
+<style>
+.labs-demo-flag{position:fixed;left:14px;bottom:14px;z-index:2147483647;display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:rgba(16,16,18,.82);color:#fff;font:500 11px/1.35 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.02em;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.16);box-shadow:0 4px 16px rgba(0,0,0,.28);transition:background .2s,transform .2s}
+.labs-demo-flag:hover{background:rgba(16,16,18,.95);transform:translateY(-1px)}
+.labs-demo-flag::before{content:"";width:6px;height:6px;border-radius:50%;background:#f5a524;flex:none}
+@media print{.labs-demo-flag{display:none}}
+</style>
+<a id="labs-demo-flag" class="labs-demo-flag" href="/labs" title="Voltar para a galeria de projetos">Projeto fict&iacute;cio &middot; demonstra&ccedil;&atilde;o</a>
+<script>if(window.self!==window.top){var f=document.getElementById("labs-demo-flag");if(f)f.remove();document.querySelectorAll(".reveal").forEach(function(e){if(!e.closest(".mobile-menu,.mobile-nav,.modal-overlay,.mobile-drawer,[hidden]")){e.classList.add("in","visible");}});}</script>
+</body>
+</html>
