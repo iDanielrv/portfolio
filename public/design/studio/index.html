@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Direção 04 — Studio · Daniel RV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --ink:   #101114;
+    --ink-2: #5A5F66;
+    --ink-3: #90959C;
+    --rule:  #E6E8EB;
+    --card:  #F4F5F7;
+    --f: 'Manrope', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--f); font-size: 15px; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 36px; }
+
+  .label {
+    font-size: 10.5px; font-weight: 600; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+
+  /* ---------- topo ---------- */
+  .top {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--rule);
+  }
+  .brand { font-weight: 800; font-size: 15px; letter-spacing: -.01em; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 13px; border: 1px solid var(--rule); border-radius: 999px;
+    font-size: 12px; font-weight: 500; color: var(--ink-2);
+  }
+  .pill::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ink);
+  }
+
+  /* ---------- hero compacto ---------- */
+  .hero { padding: 78px 0 62px; }
+  .hero h1 {
+    margin: 0; font-weight: 800; font-size: clamp(34px, 5.4vw, 62px);
+    line-height: 1.06; letter-spacing: -.035em; max-width: 18ch;
+  }
+  .hero p { margin: 24px 0 0; max-width: 50ch; font-size: 16px; color: var(--ink-2); }
+  .meta { display: flex; flex-wrap: wrap; gap: 10px 26px; margin: 28px 0 0; }
+
+  /* ---------- grade de trabalho ---------- */
+  .band {
+    display: flex; align-items: center; gap: 16px; padding: 0 0 20px;
+    border-top: 1px solid var(--rule); padding-top: 22px;
+  }
+  .band::after { content: ""; flex: 1; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .card {
+    border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+    display: flex; flex-direction: column; transition: border-color .2s, transform .2s;
+  }
+  .card:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .card.wide { grid-column: 1 / -1; }
+
+  .figure {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 20px; padding: 30px 26px; min-height: 168px; background: var(--card);
+  }
+  .card.t-cool .figure { background: #EEF1F5; }
+  .card.t-warm .figure { background: #F4F1EC; }
+  .card.t-mint .figure { background: #EDF2EF; }
+  .figure .big {
+    font-weight: 800; font-size: clamp(38px, 5vw, 58px);
+    line-height: .9; letter-spacing: -.04em;
+  }
+  .figure .cap { max-width: 26ch; font-size: 12.5px; color: var(--ink-2); text-align: right; }
+  .todo {
+    display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 9px;
+    border-radius: 4px; background: #FBF0CE; border: 1px dashed #B08900; color: #6B5200;
+  }
+
+  .body { padding: 22px 26px 26px; }
+  .body h2 { margin: 0; font-weight: 600; font-size: 19px; letter-spacing: -.02em; }
+  .body .when { margin: 4px 0 0; font-size: 12.5px; color: var(--ink-3); }
+  .body p { margin: 14px 0 0; font-size: 14px; color: var(--ink-2); max-width: 56ch; }
+  .tools { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 0; }
+  .tools span {
+    font-size: 11.5px; font-weight: 500; padding: 3px 9px;
+    border-radius: 5px; background: var(--card); color: var(--ink-2);
+  }
+
+  /* ---------- barra de informação ---------- */
+  .info {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px;
+    margin: 54px 0 0; padding: 34px 0 90px; border-top: 1px solid var(--rule);
+  }
+  .info ul { margin: 10px 0 0; padding: 0; list-style: none; font-size: 14px; }
+  .info li {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 5px 0; color: var(--ink-2);
+  }
+  .info li b { font-weight: 500; color: var(--ink); }
+  .info a { text-decoration: none; }
+  .info a:hover { text-decoration: underline; }
+
+  /* ---------- selo ---------- */
+  #flag {
+    position: fixed; left: 14px; bottom: 14px; z-index: 999;
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 13px; border-radius: 999px; background: var(--ink); color: #fff;
+    font-size: 11px; font-weight: 500; text-decoration: none;
+  }
+
+  @media (max-width: 820px) {
+    .grid { grid-template-columns: 1fr; }
+    .info { grid-template-columns: 1fr; gap: 26px; }
+    .figure { min-height: 130px; padding: 22px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="brand">Daniel Ripper Vitorino</span>
+    <span class="pill">Available for work</span>
+  </header>
+
+  <section class="hero">
+    <h1>Fullstack engineer building products end to end.</h1>
+    <p>
+      Requirements, architecture, build, tests, and the support calls after
+      go-live. TypeScript on both sides of the wire.
+    </p>
+    <div class="meta">
+      <span class="label">4 years</span>
+      <span class="label">GMT-3 · US Eastern overlap</span>
+      <span class="label">Contractor (PJ)</span>
+      <span class="label">English — advanced</span>
+    </div>
+  </section>
+
+  <div class="band"><span class="label">Selected work</span></div>
+
+  <div class="grid">
+
+    <article class="card wide t-cool">
+      <div class="figure">
+        <span class="big">~30%</span>
+        <span class="cap">less delivery time on new interfaces, from a shared component layer</span>
+      </div>
+      <div class="body">
+        <h2>Hybriun — custom software, end to end</h2>
+        <div class="when">Fullstack Developer · 2024 — Present · Remote</div>
+        <p>
+          Requirements gathering through post-go-live support, across several
+          production projects at once. Built the reusable component layer that
+          became the default starting point for every new interface.
+        </p>
+        <div class="tools"><span>Nest.js</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Prisma</span><span>MySQL</span></div>
+      </div>
+    </article>
+
+    <article class="card t-warm">
+      <div class="figure">
+        <span class="todo">falta a métrica</span>
+        <span class="cap">quantos usuários corporativos? quanto tempo por processo?</span>
+      </div>
+      <div class="body">
+        <h2>Hyundai Autoever</h2>
+        <div class="when">Fullstack Developer · 2022 — 2024</div>
+        <p>
+          Internal systems for corporate users, with structured QA, code review
+          and Git Flow. Third-party REST APIs and internal microservices
+          replacing manual steps.
+        </p>
+        <div class="tools"><span>Vue.js</span><span>Node.js</span><span>Express</span><span>MongoDB</span></div>
+      </div>
+    </article>
+
+    <article class="card t-mint">
+      <div class="figure">
+        <span class="big">5</span>
+        <span class="cap">complete landing pages, each a different art direction</span>
+      </div>
+      <div class="body">
+        <h2>Labs — storefront studies</h2>
+        <div class="when">Self-directed · art direction &amp; front-end</div>
+        <p>
+          Landing pages for Brazilian local businesses: butcher, pet shop, café,
+          barbershop, martial arts gym. Hand-written HTML and CSS, no framework.
+        </p>
+        <div class="tools"><span>HTML</span><span>CSS</span><span>SVG</span><span>Art direction</span></div>
+      </div>
+    </article>
+
+  </div>
+
+  <section class="info">
+    <div>
+      <span class="label">Stack</span>
+      <ul>
+        <li><b>TypeScript</b> <span>daily</span></li>
+        <li><b>React / Next.js</b> <span>daily</span></li>
+        <li><b>Node / Nest.js</b> <span>daily</span></li>
+        <li><b>MySQL / Prisma</b> <span>daily</span></li>
+        <li><b>Docker · Git</b> <span>tooling</span></li>
+      </ul>
+    </div>
+    <div>
+      <span class="label">Education &amp; languages</span>
+      <ul>
+        <li><b>BSc Computer Science</b> <span>exp. 2026</span></li>
+        <li><b>Faculdade de Americana</b> <span>FAM</span></li>
+        <li><b>Portuguese</b> <span>native</span></li>
+        <li><b>English</b> <span>advanced</span></li>
+      </ul>
+    </div>
+    <div>
+      <span class="label">Contact</span>
+      <ul>
+        <li><a href="mailto:danielrippervitorino@gmail.com"><b>Email</b></a> <span>gmail</span></li>
+        <li><a href="https://github.com/iDanielrv"><b>GitHub</b></a> <span>iDanielrv</span></li>
+        <li><a href="https://www.linkedin.com/in/daniel-ripperv"><b>LinkedIn</b></a> <span>daniel-ripperv</span></li>
+        <li><a href="#"><b>CV (PDF)</b></a> <span>download</span></li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<a id="flag" href="/design">04 · Studio</a>
+<script>if(window.self!==window.top){var f=document.getElementById("flag");if(f)f.remove();}</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Direção 03 — Editorial · Daniel RV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper:  #F2F2EF;
+    --paper-2:#E9E9E4;
+    --ink:    #16181A;
+    --ink-2:  #55575A;
+    --ink-3:  #8A8C8E;
+    --navy:   #14284B;
+    --rule:   #D8D8D1;
+    --f-display: 'Bodoni Moda', Didot, Georgia, serif;
+    --f-body: 'Work Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--f-body); font-size: 15px; line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+
+  .shell {
+    display: grid; grid-template-columns: 232px 1fr;
+    gap: 64px; max-width: 1160px; margin: 0 auto; padding: 0 40px;
+  }
+
+  /* ---------- coluna marginal ---------- */
+  .margin { padding: 48px 0 60px; }
+  .margin-in { position: sticky; top: 48px; }
+  .name {
+    font-family: var(--f-display); font-weight: 400;
+    font-size: 25px; line-height: 1.12; letter-spacing: -.01em;
+  }
+  .role {
+    margin: 10px 0 0; font-size: 12.5px; color: var(--ink-2);
+  }
+  .mrule { height: 1px; background: var(--rule); margin: 26px 0; }
+  .mlabel {
+    font-size: 10px; font-weight: 600; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px;
+  }
+  .mlist { margin: 0 0 24px; padding: 0; list-style: none; font-size: 13px; }
+  .mlist li { padding: 2px 0; color: var(--ink-2); }
+  .mlist a { text-decoration: none; color: var(--navy); }
+  .mlist a:hover { text-decoration: underline; }
+  .avail {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--navy); font-weight: 500;
+  }
+  .avail::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--navy);
+  }
+
+  /* ---------- coluna principal ---------- */
+  .main { padding: 48px 0 90px; min-width: 0; }
+
+  .lead h1 {
+    margin: 34px 0 0; font-family: var(--f-display); font-weight: 400;
+    font-size: clamp(40px, 6vw, 78px); line-height: 1.03; letter-spacing: -.015em;
+    max-width: 15ch;
+  }
+  .lead h1 em { font-style: italic; color: var(--navy); }
+  .lead .sub {
+    margin: 30px 0 0; max-width: 52ch; font-size: 16.5px; color: var(--ink-2);
+  }
+
+  .band {
+    display: flex; align-items: center; gap: 16px; margin: 74px 0 0;
+    font-size: 10px; font-weight: 600; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  .band::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+  .item {
+    display: grid; grid-template-columns: 34px 1fr; gap: 22px;
+    padding: 34px 0; border-bottom: 1px solid var(--rule);
+  }
+  .item-n {
+    font-family: var(--f-display); font-size: 17px; color: var(--navy); padding-top: 4px;
+  }
+  .item h2 {
+    margin: 0; font-family: var(--f-display); font-weight: 400;
+    font-size: clamp(23px, 2.9vw, 31px); line-height: 1.16; letter-spacing: -.01em;
+  }
+  .item .when { margin: 6px 0 0; font-size: 12.5px; color: var(--ink-3); }
+  .item p { margin: 16px 0 0; max-width: 58ch; color: var(--ink-2); }
+  .metric {
+    display: inline-flex; align-items: baseline; gap: 10px; margin: 18px 0 0;
+    padding: 8px 14px; background: var(--paper-2); border-left: 2px solid var(--navy);
+  }
+  .metric b {
+    font-family: var(--f-display); font-weight: 500; font-size: 26px;
+    line-height: 1; color: var(--ink);
+  }
+  .metric span { font-size: 12.5px; color: var(--ink-2); max-width: 34ch; }
+  .todo {
+    font-size: 11.5px; padding: 2px 8px; background: #FBF0CE;
+    border: 1px dashed #B08900; color: #6B5200;
+  }
+  .tools { margin: 16px 0 0; font-size: 12px; color: var(--ink-3); letter-spacing: .02em; }
+
+  .brief { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin: 30px 0 0; }
+  .brief ul { margin: 8px 0 0; padding: 0; list-style: none; font-size: 14px; }
+  .brief li {
+    display: flex; justify-content: space-between; gap: 14px;
+    padding: 5px 0; border-bottom: 1px solid var(--rule); color: var(--ink-2);
+  }
+  .brief li b { font-weight: 500; color: var(--ink); }
+
+  /* ---------- selo ---------- */
+  #flag {
+    position: fixed; left: 14px; bottom: 14px; z-index: 999;
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 13px; border-radius: 999px; background: var(--navy); color: var(--paper);
+    font-size: 11px; text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; gap: 0; padding: 0 26px; }
+    .margin { padding: 34px 0 0; }
+    .margin-in { position: static; }
+    .main { padding: 26px 0 80px; }
+    .brief { grid-template-columns: 1fr; gap: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <aside class="margin">
+    <div class="margin-in">
+      <div class="name">Daniel<br />Ripper Vitorino</div>
+      <div class="role">Fullstack engineer<br />Americana, SP — Brazil</div>
+
+      <div class="mrule"></div>
+
+      <div class="mlabel">Working</div>
+      <ul class="mlist">
+        <li>GMT-3 · US Eastern overlap</li>
+        <li>Contractor (PJ) · remote</li>
+        <li>English — advanced</li>
+      </ul>
+
+      <div class="mlabel">Elsewhere</div>
+      <ul class="mlist">
+        <li><a href="mailto:danielrippervitorino@gmail.com">Email</a></li>
+        <li><a href="https://github.com/iDanielrv">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/daniel-ripperv">LinkedIn</a></li>
+        <li><a href="#">Curriculum vitae (PDF)</a></li>
+      </ul>
+
+      <span class="avail">Available for work</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section class="lead">
+      <h1>Four years shipping software that <em>stayed</em> shipped.</h1>
+      <p class="sub">
+        End-to-end delivery — requirements, architecture, build, tests, and the
+        support calls after go-live. TypeScript on both sides of the wire.
+      </p>
+    </section>
+
+    <div class="band">Selected work</div>
+
+    <article class="item">
+      <div class="item-n">I</div>
+      <div>
+        <h2>Hybriun — custom software, end to end</h2>
+        <div class="when">Fullstack Developer · 2024 — Present · Remote</div>
+        <p>
+          Requirements gathering through post-go-live support, across several
+          production projects at once. Built a reusable component layer that
+          became the default starting point for every new interface.
+        </p>
+        <div class="metric">
+          <b>~30%</b><span>less delivery time on new interfaces</span>
+        </div>
+        <div class="tools">Nest.js · TypeScript · React · Next.js · Prisma · MySQL</div>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="item-n">II</div>
+      <div>
+        <h2>Hyundai Autoever — internal corporate systems</h2>
+        <div class="when">Fullstack Developer · 2022 — 2024</div>
+        <p>
+          Internal tooling for corporate users, in an environment with structured
+          QA, code review and Git Flow. Integrated third-party REST APIs and
+          internal microservices to replace manual operational steps.
+        </p>
+        <div class="metric">
+          <span class="todo">falta a métrica</span><span>quantos usuários corporativos? quanto tempo por processo?</span>
+        </div>
+        <div class="tools">Vue.js · Node.js · Express · MongoDB</div>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="item-n">III</div>
+      <div>
+        <h2>Labs — five storefront studies</h2>
+        <div class="when">Self-directed · art direction &amp; front-end</div>
+        <p>
+          Landing pages for Brazilian local businesses: butcher, pet shop, café,
+          barbershop, martial arts gym. Hand-written HTML and CSS, no framework
+          and no component library.
+        </p>
+        <div class="metric">
+          <b>5</b><span>complete pages, each a different art direction</span>
+        </div>
+        <div class="tools">HTML · CSS · SVG · Art direction</div>
+      </div>
+    </article>
+
+    <div class="band">In brief</div>
+    <div class="brief">
+      <div>
+        <ul>
+          <li><b>TypeScript</b> <span>daily</span></li>
+          <li><b>React / Next.js</b> <span>daily</span></li>
+          <li><b>Node / Nest.js</b> <span>daily</span></li>
+          <li><b>MySQL / Prisma</b> <span>daily</span></li>
+          <li><b>Vue.js / MongoDB</b> <span>prior role</span></li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li><b>BSc Computer Science</b> <span>exp. 2026</span></li>
+          <li><b>Faculdade de Americana</b> <span>FAM</span></li>
+          <li><b>Portuguese</b> <span>native</span></li>
+          <li><b>English</b> <span>advanced</span></li>
+          <li><b>Docker · Git · Postman</b> <span>tooling</span></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<a id="flag" href="/design">03 · Editorial</a>
+<script>if(window.self!==window.top){var f=document.getElementById("flag");if(f)f.remove();}</script>
+</body>
+</html>
