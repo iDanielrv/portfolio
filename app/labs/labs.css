@@ -242,13 +242,31 @@ body:has(.labs-page) {
   min-width: 0;
   padding: 22px 20px 24px;
 }
+.labs-segline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 .labs-seg {
-  display: block;
   font-family: var(--f-mono);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--signal);
+}
+/* trabalho para cliente de verdade, em contraste com os estudos */
+.labs-client {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  background: var(--signal);
+  color: var(--paper-3);
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 .labs-name {
   margin: 12px 0 0;

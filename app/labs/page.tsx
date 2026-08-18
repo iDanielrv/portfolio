@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { labs, labsCopy, labUrl, t, withCount } from "@/lib/labs";
+import { labs, labsCopy, labPath, labUrl, t, withCount } from "@/lib/labs";
 import "./labs.css";
 
 export default function LabsPage() {
@@ -30,7 +30,7 @@ export default function LabsPage() {
               rel="noopener noreferrer"
             >
               <div className="labs-bar">
-                <span className="labs-path">/labs/{lab.slug}</span>
+                <span className="labs-path">{labPath(lab)}</span>
                 <span className="labs-open">
                   {t(labsCopy.open)} <span aria-hidden="true">→</span>
                 </span>
@@ -48,7 +48,12 @@ export default function LabsPage() {
               </div>
 
               <div className="labs-body">
-                <span className="labs-seg">{t(lab.segment)}</span>
+                <span className="labs-segline">
+                  <span className="labs-seg">{t(lab.segment)}</span>
+                  {lab.client && (
+                    <span className="labs-client">{t(labsCopy.clientTag)}</span>
+                  )}
+                </span>
                 <h2 className="labs-name">{lab.name}</h2>
                 <p className="labs-blurb">{t(lab.blurb)}</p>
               </div>

@@ -22,7 +22,7 @@ export function t(text: Text, locale: Locale = ACTIVE_LOCALE): string {
 export type Lab = {
   /** Pasta em public/labs — define a URL da demo. */
   slug: string;
-  /** Nome fictício do negócio. Não traduz: é nome próprio. */
+  /** Nome do negócio. Não traduz: é nome próprio. */
   name: string;
   /** Segmento do comércio, usado como etiqueta. */
   segment: Text;
@@ -30,11 +30,23 @@ export type Lab = {
   blurb: Text;
   /** Ocupa a largura toda no topo da galeria. Use em apenas um. */
   featured?: boolean;
+  /**
+   * Trabalho para cliente de verdade, não estudo.
+   * Ganha etiqueta própria e fica de fora do aviso de negócio fictício.
+   */
+  client?: boolean;
+  /** Sobrescreve o caminho, para demos que não vivem em public/labs. */
+  url?: string;
 };
 
-/** Caminho servido a partir de public/labs. */
+/** Caminho servido a partir de public/labs, ou o url próprio da demo. */
 export function labUrl(lab: Lab): string {
-  return `/labs/${lab.slug}/index.html`;
+  return lab.url ?? `/labs/${lab.slug}/index.html`;
+}
+
+/** O mesmo caminho, sem o index.html — é o que a barra do card mostra. */
+export function labPath(lab: Lab): string {
+  return labUrl(lab).replace(/\/index\.html$/, "");
 }
 
 const NUMERALS: Record<Locale, string[]> = {
@@ -56,22 +68,24 @@ export function withCount(text: Text, locale: Locale = ACTIVE_LOCALE): string {
 
 export const labs: Lab[] = [
   {
+    slug: "mabi",
+    name: "Açougue MABI",
+    segment: { pt: "Açougue", en: "Butcher shop" },
+    blurb: {
+      pt: "Cliente real. Açougue de cortes premium com pedido direto no WhatsApp — identidade da casa, fotos dos próprios cortes e nenhuma imagem de banco.",
+      en: "Real client. A premium-cuts butcher with ordering straight through WhatsApp — the shop's own identity, photographs of its own cuts, no stock imagery.",
+    },
+    featured: true,
+    client: true,
+    url: "/mabi",
+  },
+  {
     slug: "espaco-fofurinha",
     name: "Espaço Fofurinha",
     segment: { pt: "Pet shop", en: "Pet shop" },
     blurb: {
       pt: "Banho e tosa com agendamento sem formulário: doze atalhos de WhatsApp, um por serviço, cada um com a mensagem já escrita.",
       en: "Pet grooming with no booking form: twelve WhatsApp shortcuts, one per service, each with the message already written.",
-    },
-    featured: true,
-  },
-  {
-    slug: "corte-nobre",
-    name: "Corte Nobre",
-    segment: { pt: "Açougue", en: "Butcher shop" },
-    blurb: {
-      pt: "Açougue de bairro em chave premium. O cutelo do topo é SVG desenhado à mão — nenhuma foto de banco de imagens na página.",
-      en: "A neighborhood butcher played in a premium key. The cleaver up top is hand-drawn SVG — not a single stock photo on the page.",
     },
   },
   {
@@ -137,18 +151,19 @@ export const labsCopy = {
   titleLead: { pt: "Estudos de", en: "Storefront" },
   titleAccent: { pt: "vitrine", en: "studies" },
   lede: {
-    pt: "{n} negócios que não existem, com a landing page que cada um teria. Estudos de direção de arte para comércio de bairro: tom de voz, ritmo de leitura e o caminho até o contato.",
-    en: "{n} businesses that don't exist, each with the landing page it would have. Art direction studies for neighborhood commerce: tone of voice, reading rhythm, and the path to getting in touch.",
+    pt: "{n} landing pages para comércio de bairro. As marcadas como cliente são trabalho real; as demais, estudos de negócios que não existem — tom de voz, ritmo de leitura e o caminho até o contato.",
+    en: "{n} landing pages for neighborhood commerce. The ones marked as client work are real; the rest are studies of businesses that don't exist — tone of voice, reading rhythm, and the path to getting in touch.",
   },
   note: {
-    pt: "Negócios fictícios. Nomes, preços, telefones e endereços são de demonstração — nenhum dado real.",
-    en: "Fictional businesses. Names, prices, phone numbers and addresses are placeholders — no real data.",
+    pt: "Nos estudos, nomes, preços, telefones e endereços são de demonstração.",
+    en: "In the studies, names, prices, phone numbers and addresses are placeholders.",
   },
+  clientTag: { pt: "Cliente", en: "Client work" },
   open: { pt: "Abrir", en: "Open" },
   previewAlt: { pt: "Prévia da landing page", en: "Preview of the landing page" },
   foot: {
-    pt: "As {n} páginas são HTML e CSS escritos à mão, sem framework nem biblioteca de componentes. As prévias acima são as páginas de verdade rodando — passe o mouse para ver o resto de cada uma.",
-    en: "All {n} are hand-written HTML and CSS — no framework, no component library. The previews above are the real pages running; hover to pan through each one. The pages themselves are in Portuguese, since that is who they were built for.",
+    pt: "Os estudos são HTML e CSS escritos à mão, sem framework nem biblioteca de componentes. As prévias acima são as páginas de verdade rodando — passe o mouse para ver o resto de cada uma.",
+    en: "The studies are hand-written HTML and CSS — no framework, no component library. The previews above are the real pages running; hover to pan through each one. The pages themselves are in Portuguese, since that is who they were built for.",
   },
 } satisfies Record<string, Text>;
 
