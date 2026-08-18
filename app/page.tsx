@@ -328,13 +328,13 @@ export default function Home() {
               <a href={PHONE_HREF}>Phone</a> <span>{PHONE_TEXT}</span>
             </li>
             <li>
-              <a href={GITHUB} target="_blank" rel="noopener">
+              <a href={GITHUB} target="_blank" rel="noopener noreferrer">
                 GitHub
               </a>{" "}
               <span>iDanielrv</span>
             </li>
             <li>
-              <a href={LINKEDIN} target="_blank" rel="noopener">
+              <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
                 LinkedIn
               </a>{" "}
               <span>daniel-ripperv</span>

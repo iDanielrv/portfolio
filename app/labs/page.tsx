@@ -27,7 +27,7 @@ export default function LabsPage() {
               style={{ animationDelay: `${i * 90}ms` }}
               href={labUrl(lab)}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
             >
               <div className="labs-bar">
                 <span className="labs-path">/labs/{lab.slug}</span>

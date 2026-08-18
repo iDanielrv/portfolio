@@ -147,7 +147,7 @@ export const labsCopy = {
   open: { pt: "Abrir", en: "Open" },
   previewAlt: { pt: "Prévia da landing page", en: "Preview of the landing page" },
   foot: {
-    pt: "As {n} são HTML e CSS escritos à mão, sem framework nem biblioteca de componentes. As prévias acima são as páginas de verdade rodando — passe o mouse para ver o resto de cada uma.",
+    pt: "As {n} páginas são HTML e CSS escritos à mão, sem framework nem biblioteca de componentes. As prévias acima são as páginas de verdade rodando — passe o mouse para ver o resto de cada uma.",
     en: "All {n} are hand-written HTML and CSS — no framework, no component library. The previews above are the real pages running; hover to pan through each one. The pages themselves are in Portuguese, since that is who they were built for.",
   },
 } satisfies Record<string, Text>;
