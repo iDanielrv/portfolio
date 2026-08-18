@@ -140,6 +140,10 @@ body:has(.labs-page) {
 
 .labs-card {
   --z: 0.58;
+  /* quanto a prévia desliza no hover, em pixels visíveis na tela.
+     A altura do iframe é derivada deste valor, então o deslocamento
+     termina exatamente no fim da página renderizada — nunca depois. */
+  --pan: 140px;
   display: flex;
   flex-direction: column;
   background: var(--paper-3);
@@ -214,9 +218,11 @@ body:has(.labs-page) {
   top: 0;
   left: 0;
   width: calc(100% / var(--z));
-  /* piso de altura lógica: overlays com position:fixed precisam de um
-     viewport realista para ficarem fora de vista */
-  height: max(calc(100% / var(--z)), 800px);
+  /* altura = moldura + a folga do hover, convertida para escala lógica.
+     min-height só aumenta a folga (nunca reduz), então serve de piso para
+     overlays com position:fixed sem quebrar a conta acima. */
+  height: calc((100% + var(--pan)) / var(--z));
+  min-height: 720px;
   border: 0;
   transform: scale(var(--z));
   transform-origin: 0 0;
@@ -225,7 +231,9 @@ body:has(.labs-page) {
 }
 .labs-card:hover .labs-frame iframe,
 .labs-card:focus-visible .labs-frame iframe {
-  transform: scale(var(--z)) translateY(-40%);
+  /* dividido por --z porque o translate acontece antes da escala:
+     o resultado na tela é exatamente --pan pixels */
+  transform: scale(var(--z)) translateY(calc(-1 * var(--pan) / var(--z)));
 }
 
 /* ---------- texto do card ---------- */
@@ -298,9 +306,11 @@ body:has(.labs-page) {
   }
   .labs-card {
     --z: 0.44;
+    --pan: 170px;
   }
   .labs-card.is-featured {
     --z: 0.86;
+    --pan: 240px;
     grid-column: 1 / -1;
   }
   .labs-card.is-featured .labs-frame {
