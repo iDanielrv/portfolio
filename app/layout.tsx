@@ -28,8 +28,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        {/* Instrument Serif / IBM Plex: home (direção Case-first).
+            Fraunces / JetBrains Mono: ainda usadas por /labs e /design. */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;0,900;1,300;1,700&family=JetBrains+Mono:wght@300;400;500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,700&family=JetBrains+Mono:wght@300;400;500;700&display=swap"
           rel="stylesheet"
         />
       </head>

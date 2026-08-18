@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CT2 Two Brothers — Combat Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0a0a0a;
+    --char: #111111;
+    --panel: #161616;
+    --panel-2: #1c1c1c;
+    --red: #cc1100;
+    --red-bright: #ff2b14;
+    --gold: #d4af37;
+    --wa: #25d366;
+    --wa-dark: #1da851;
+    --white: #ffffff;
+    --gray: #aaaaaa;
+    --gray-dim: #6e6e6e;
+    --line: rgba(255, 255, 255, 0.08);
+    --display: "Bebas Neue", "Arial Narrow", sans-serif;
+    --body: "Rajdhani", "Segoe UI", sans-serif;
+    --hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.2'%3E%3Cpath d='M28 0L56 16v34L28 66 0 50V16z'/%3E%3Cpath d='M28 66l28 16v34L28 132 0 116V82z'/%3E%3C/g%3E%3C/svg%3E");
+    --maxw: 1200px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--body);
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--red); color: #fff; }
+
+  /* ---------- Shared type ---------- */
+  .eyebrow {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: clamp(0.72rem, 1.3vw, 0.85rem);
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 2px;
+    background: var(--red);
+  }
+  .eyebrow.center { justify-content: center; }
+  .eyebrow.center::after {
+    content: "";
+    width: 34px;
+    height: 2px;
+    background: var(--red);
+  }
+  h1, h2, h3, .display {
+    font-family: var(--display);
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+  }
+  .section-title {
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+  }
+  .lead {
+    font-weight: 400;
+    color: var(--gray);
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    letter-spacing: 0.01em;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  section { position: relative; }
+
+  /* honeycomb texture layer */
+  .hex-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--hex);
+    background-size: 56px 100px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hex-bg > * { position: relative; z-index: 1; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 1.05em 1.9em;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.25s ease, background 0.25s ease;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, calc(100% - 14px) 100%, 0 100%);
+  }
+  .btn svg { width: 1.25em; height: 1.25em; flex-shrink: 0; }
+  .btn-wa {
+    background: var(--wa);
+    color: #04331a;
+    box-shadow: 0 10px 30px -8px rgba(37, 211, 102, 0.55);
+  }
+  .btn-wa:hover { background: #2ee676; transform: translateY(-3px); box-shadow: 0 16px 40px -10px rgba(37, 211, 102, 0.7); }
+  .btn-red {
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 10px 30px -10px rgba(204, 17, 0, 0.7);
+  }
+  .btn-red:hover { background: var(--red-bright); transform: translateY(-3px); box-shadow: 0 16px 42px -10px rgba(255, 43, 20, 0.75); }
+  .btn-ghost {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.25);
+  }
+  .btn-ghost:hover { border-color: var(--red); color: var(--red-bright); }
+
+  /* ---------- NAV ---------- */
+  header.nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+    border-bottom: 1px solid transparent;
+  }
+  header.nav.scrolled {
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand .mark {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    background: var(--red);
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    font-family: var(--display);
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    color: #fff;
+  }
+  .brand .name { font-family: var(--display); font-size: 1.7rem; letter-spacing: 0.06em; line-height: 1; }
+  .brand .name small { display: block; font-family: var(--body); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.42em; color: var(--gray); }
+  nav.links { display: flex; gap: 32px; align-items: center; }
+  nav.links a {
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray);
+    transition: color 0.2s ease;
+    position: relative;
+  }
+  nav.links a:hover { color: #fff; }
+  nav.links a::after {
+    content: ""; position: absolute; left: 0; bottom: -6px;
+    width: 0; height: 2px; background: var(--red);
+    transition: width 0.25s ease;
+  }
+  nav.links a:hover::after { width: 100%; }
+  .nav-cta { display: flex; align-items: center; gap: 18px; }
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .menu-toggle span { width: 26px; height: 2px; background: #fff; transition: 0.25s; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 120px 0 90px;
+    background:
+      radial-gradient(120% 90% at 80% 10%, rgba(204,17,0,0.20), transparent 55%),
+      radial-gradient(90% 80% at 15% 90%, rgba(204,17,0,0.10), transparent 60%),
+      linear-gradient(180deg, #0c0c0c 0%, #0a0a0a 60%, #060606 100%);
+  }
+  /* user can drop a real photo: set --hero-img on .hero in JS or inline */
+  .hero .photo-layer {
+    position: absolute; inset: 0;
+    background: var(--hero-img, none) center/cover no-repeat;
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(6,6,6,0.95) 0%, rgba(6,6,6,0.55) 45%, rgba(6,6,6,0.2) 100%),
+      radial-gradient(140% 120% at 50% 120%, transparent 40%, rgba(0,0,0,0.85) 100%);
+    z-index: 1;
+  }
+  .hero .wrap { position: relative; z-index: 3; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; }
+
+  .badge-trial {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 0.6em;
+    font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    font-size: 0.8rem; color: #fff;
+    padding: 0.7em 1.2em;
+    background: rgba(204,17,0,0.12);
+    border: 1px solid rgba(204,17,0,0.5);
+    margin-bottom: 28px;
+  }
+  .badge-trial .pulse {
+    width: 9px; height: 9px; border-radius: 50%; background: var(--red-bright);
+    box-shadow: 0 0 0 0 rgba(255,43,20,0.7);
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255,43,20,0.6); }
+    70% { box-shadow: 0 0 0 12px rgba(255,43,20,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,43,20,0); }
+  }
+  .hero h1 {
+    font-size: clamp(3.4rem, 9.5vw, 8rem);
+    margin-bottom: 22px;
+  }
+  .hero h1 .accent { color: var(--red-bright); display: block; }
+  .hero .lead { max-width: 30ch; margin-bottom: 38px; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .hero-meta { display: flex; gap: 34px; margin-top: 48px; flex-wrap: wrap; }
+  .hero-meta .stat .n { font-family: var(--display); font-size: 2.8rem; line-height: 0.9; color: #fff; }
+  .hero-meta .stat .n span { color: var(--red-bright); }
+  .hero-meta .stat .l { font-weight: 600; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-top: 6px; }
+
+  /* fight-poster placeholder block in hero right */
+  .hero-poster {
+    position: relative;
+    aspect-ratio: 3/4;
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%);
+  }
+  .seal {
+    position: absolute; z-index: 5; top: -18px; right: -18px;
+    width: 116px; height: 116px;
+    display: grid; place-items: center; text-align: center;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 35%, #f4cf5e, #d4af37 55%, #9c7d1c);
+    color: #2a2105;
+    box-shadow: 0 14px 30px -8px rgba(0,0,0,0.6), inset 0 0 0 3px rgba(255,255,255,0.25);
+    transform: rotate(8deg);
+    animation: sealspin 18s linear infinite;
+  }
+  @keyframes sealspin { to { transform: rotate(368deg); } }
+  .seal .seal-inner {
+    font-family: var(--display); line-height: 0.85;
+  }
+  .seal .seal-inner b { display: block; font-size: 1.7rem; }
+  .seal .seal-inner em { font-style: normal; font-family: var(--body); font-weight: 700; font-size: 0.55rem; letter-spacing: 0.2em; }
+
+  /* ---------- striped image placeholder ---------- */
+  .ph {
+    position: relative;
+    width: 100%; height: 100%;
+    background:
+      repeating-linear-gradient(45deg, #161616, #161616 14px, #1b1b1b 14px, #1b1b1b 28px);
+    border: 1px solid var(--line);
+    display: grid; place-items: center;
+    overflow: hidden;
+  }
+  .ph .ph-label {
+    font-family: var(--body); font-weight: 600;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gray-dim);
+    background: rgba(10,10,10,0.7);
+    padding: 8px 14px;
+    border: 1px dashed rgba(255,255,255,0.15);
+  }
+  .ph .ph-label::before { content: "▣  "; color: var(--red); }
+
+  /* ---------- DIAGONAL SECTION ---------- */
+  .slab { padding: clamp(80px, 11vw, 150px) 0; }
+  .slab.cut-top { clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 100%); margin-top: -3vw; }
+  .slab.dark { background: var(--char); }
+  .slab.darker { background: #0c0c0c; }
+
+  .section-head { margin-bottom: 56px; max-width: 760px; }
+  .section-head.center { margin-inline: auto; text-align: center; }
+  .section-head h2 { margin: 16px 0 18px; }
+
+  /* ---------- DISCIPLINES ---------- */
+  .disc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .disc-card {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 34px 30px 30px;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .disc-card::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--red); transform: scaleY(0); transform-origin: top; transition: transform 0.3s ease;
+  }
+  .disc-card:hover { transform: translateY(-6px); border-color: rgba(204,17,0,0.4); background: var(--panel-2); }
+  .disc-card:hover::before { transform: scaleY(1); }
+  .disc-card .num { position: absolute; top: 18px; right: 22px; font-family: var(--display); font-size: 2.4rem; color: rgba(255,255,255,0.06); }
+  .disc-icon { width: 52px; height: 52px; color: var(--red-bright); margin-bottom: 22px; }
+  .disc-icon svg { width: 100%; height: 100%; }
+  .disc-card h3 { font-size: 1.9rem; margin-bottom: 10px; letter-spacing: 0.03em; }
+  .disc-card p { color: var(--gray); font-size: 1rem; font-weight: 400; }
+  .disc-card.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+    background: linear-gradient(150deg, #1a0f0d 0%, #161616 60%);
+    border-color: rgba(204,17,0,0.4);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 44px 42px;
+  }
+  .disc-card.featured .disc-icon { width: 72px; height: 72px; }
+  .disc-card.featured h3 { font-size: clamp(2.6rem, 4.5vw, 4rem); }
+  .disc-card.featured p { font-size: 1.15rem; max-width: 46ch; }
+  .disc-card.featured .tag {
+    position: absolute; top: 30px; left: 42px;
+    font-weight: 700; letter-spacing: 0.2em; font-size: 0.72rem; text-transform: uppercase;
+    color: var(--gold); display: inline-flex; align-items: center; gap: 8px;
+  }
+  .disc-card.featured .tag::before { content: "★"; }
+
+  /* ---------- INSTRUCTORS ---------- */
+  .masters-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .master {
+    position: relative;
+    aspect-ratio: 3/4.1;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    cursor: pointer;
+  }
+  .master .ph { filter: grayscale(1) brightness(0.62); transition: filter 0.4s ease, transform 0.5s ease; }
+  .master::after {
+    content: ""; position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(180deg, rgba(204,17,0,0.0) 30%, rgba(204,17,0,0.35) 65%, rgba(8,3,2,0.95) 100%);
+    mix-blend-mode: normal; transition: opacity 0.4s ease;
+  }
+  .master:hover .ph { filter: grayscale(0) brightness(0.9); transform: scale(1.04); }
+  .master .belt-flag {
+    position: absolute; top: 0; left: 0; z-index: 4;
+    background: var(--red); color: #fff;
+    font-weight: 700; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 8px 16px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%, 0 calc(100% - 10px));
+  }
+  .master .info {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
+    padding: 26px 24px;
+  }
+  .master .info .role { font-weight: 600; font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .master .info h3 { font-size: 2.2rem; margin: 6px 0 2px; }
+  .master .info .belt { font-weight: 600; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; }
+  .master .achievements {
+    max-height: 0; overflow: hidden; opacity: 0;
+    transition: max-height 0.45s ease, opacity 0.35s ease, margin 0.45s ease;
+    margin-top: 0;
+  }
+  .master:hover .achievements { max-height: 160px; opacity: 1; margin-top: 14px; }
+  .master .achievements li {
+    list-style: none; color: var(--gray); font-size: 0.9rem; font-weight: 400;
+    padding-left: 18px; position: relative; margin-bottom: 4px;
+  }
+  .master .achievements li::before { content: "›"; position: absolute; left: 0; color: var(--red-bright); font-weight: 700; }
+
+  /* ---------- WHY ---------- */
+  .why-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid var(--line); }
+  .why-cell {
+    padding: 44px 34px;
+    border-right: 1px solid var(--line);
+    transition: background 0.25s ease;
+  }
+  .why-cell:last-child { border-right: none; }
+  .why-cell:hover { background: var(--panel); }
+  .why-icon { width: 46px; height: 46px; color: var(--red-bright); margin-bottom: 22px; }
+  .why-cell h3 { font-size: 1.55rem; margin-bottom: 12px; line-height: 1; }
+  .why-cell p { color: var(--gray); font-size: 0.98rem; font-weight: 400; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .quote-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .quote {
+    position: relative; background: var(--panel); border: 1px solid var(--line);
+    padding: 50px 32px 32px;
+  }
+  .quote .mark { font-family: var(--display); font-size: 6rem; line-height: 0.5; color: var(--red); position: absolute; top: 28px; left: 24px; opacity: 0.8; }
+  .quote p { position: relative; z-index: 1; font-size: 1.12rem; font-weight: 400; color: #e8e8e8; margin-bottom: 26px; }
+  .quote .who { display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--line); padding-top: 20px; }
+  .quote .avatar { width: 44px; height: 44px; border-radius: 50%; background: repeating-linear-gradient(45deg,#1b1b1b,#1b1b1b 6px,#222 6px,#222 12px); border: 1px solid var(--line); flex-shrink: 0; }
+  .quote .who .nm { font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.04em; }
+  .quote .who .dur { font-weight: 600; font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+
+  /* ---------- SCHEDULE ---------- */
+  .sched-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+  .sched-tab {
+    font-family: var(--body); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gray); background: var(--panel);
+    border: 1px solid var(--line); padding: 0.7em 1.2em; cursor: pointer; transition: 0.2s;
+  }
+  .sched-tab:hover { color: #fff; border-color: rgba(255,255,255,0.25); }
+  .sched-tab.active { background: var(--red); color: #fff; border-color: var(--red); }
+  .sched-table { width: 100%; border-collapse: collapse; }
+  .sched-table th, .sched-table td {
+    border: 1px solid var(--line); padding: 14px 12px; text-align: center;
+    font-weight: 500;
+  }
+  .sched-table th {
+    font-family: var(--body); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gray); background: var(--char);
+  }
+  .sched-table td.time { font-family: var(--display); font-size: 1.3rem; color: #fff; background: rgba(255,255,255,0.02); letter-spacing: 0.04em; }
+  .sched-table td .cls {
+    display: inline-block; font-weight: 600; font-size: 0.86rem; letter-spacing: 0.04em;
+    text-transform: uppercase; padding: 5px 10px;
+  }
+  .cls.bjj { background: rgba(204,17,0,0.15); color: #ff7a6b; border: 1px solid rgba(204,17,0,0.4); }
+  .cls.muay { background: rgba(212,175,55,0.12); color: var(--gold); border: 1px solid rgba(212,175,55,0.35); }
+  .cls.mma { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid var(--line); }
+  .cls.empty { color: var(--gray-dim); }
+
+  /* ---------- LOCATION + FINAL CTA ---------- */
+  .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; }
+  .loc-info { padding: clamp(50px,7vw,90px) clamp(30px,5vw,70px); background: var(--char); }
+  .loc-info .addr { display: flex; gap: 16px; margin: 26px 0; align-items: flex-start; }
+  .loc-info .addr svg { width: 26px; height: 26px; color: var(--red-bright); flex-shrink: 0; margin-top: 4px; }
+  .loc-info .addr .t { font-size: 1.1rem; color: #ededed; }
+  .loc-info .addr .t b { display: block; font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.04em; color: #fff; margin-bottom: 4px; }
+  .map-wrap { position: relative; min-height: 360px; }
+  .map-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(1) invert(0.92) contrast(0.85); }
+
+  .final-cta {
+    text-align: center;
+    padding: clamp(90px,12vw,160px) 0;
+    background:
+      radial-gradient(80% 130% at 50% 0%, rgba(204,17,0,0.28), transparent 60%),
+      linear-gradient(180deg, #140a08, #0a0a0a);
+  }
+  .final-cta h2 { font-size: clamp(3rem, 8vw, 6.5rem); margin: 18px 0 14px; }
+  .final-cta h2 .gold { color: var(--gold); }
+  .final-cta .lead { max-width: 44ch; margin: 0 auto 40px; }
+
+  /* ---------- FOOTER ---------- */
+  footer { background: #060606; padding: 70px 0 36px; border-top: 1px solid var(--line); }
+  .foot-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+  .foot-tagline { font-family: var(--display); font-size: clamp(1.6rem,3vw,2.4rem); max-width: 16ch; line-height: 0.95; }
+  .foot-tagline span { color: var(--red-bright); }
+  .socials { display: flex; gap: 14px; }
+  .socials a {
+    width: 46px; height: 46px; display: grid; place-items: center;
+    border: 1px solid var(--line); color: var(--gray); transition: 0.25s;
+  }
+  .socials a:hover { background: var(--red); color: #fff; border-color: var(--red); transform: translateY(-3px); }
+  .socials a svg { width: 20px; height: 20px; }
+  .foot-bottom {
+    margin-top: 50px; padding-top: 26px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+    color: var(--gray-dim); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+  }
+
+  /* ---------- FLOATING WHATSAPP ---------- */
+  .wa-float {
+    position: fixed; right: 22px; bottom: 22px; z-index: 200;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--wa); display: grid; place-items: center;
+    box-shadow: 0 12px 30px -6px rgba(37,211,102,0.6);
+    transition: transform 0.2s ease;
+    animation: floatbob 3s ease-in-out infinite;
+  }
+  .wa-float:hover { transform: scale(1.08); }
+  .wa-float svg { width: 32px; height: 32px; color: #fff; }
+  .wa-float .ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--wa); animation: waring 2.2s ease-out infinite; }
+  @keyframes waring { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.7); opacity: 0; } }
+  @keyframes floatbob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: 0.08s; }
+  .reveal.d2 { transition-delay: 0.16s; }
+  .reveal.d3 { transition-delay: 0.24s; }
+  .reveal.d4 { transition-delay: 0.32s; }
+  .reveal.d5 { transition-delay: 0.40s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .seal, .badge-trial .pulse, .wa-float, .wa-float .ring { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px) {
+    nav.links { display: none; }
+    .menu-toggle { display: flex; }
+    nav.links.open {
+      display: flex; flex-direction: column; gap: 0;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(10,10,10,0.98); border-bottom: 1px solid var(--line); padding: 10px 24px 20px;
+    }
+    nav.links.open a { padding: 14px 0; border-bottom: 1px solid var(--line); width: 100%; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-poster { display: none; }
+    .disc-grid { grid-template-columns: repeat(2,1fr); }
+    .disc-card.featured { grid-column: span 2; grid-row: auto; }
+    .masters-grid { grid-template-columns: repeat(2,1fr); }
+    .why-grid { grid-template-columns: repeat(2,1fr); }
+    .why-cell:nth-child(2) { border-right: none; }
+    .why-cell:nth-child(1), .why-cell:nth-child(2) { border-bottom: 1px solid var(--line); }
+    .quote-grid { grid-template-columns: 1fr; }
+    .loc-grid { grid-template-columns: 1fr; }
+    .map-wrap { min-height: 320px; }
+  }
+  @media (max-width: 560px) {
+    .disc-grid { grid-template-columns: 1fr; }
+    .disc-card.featured { grid-column: auto; }
+    .masters-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .why-cell { border-right: none; border-bottom: 1px solid var(--line); }
+    .why-cell:last-child { border-bottom: none; }
+    .hero-meta { gap: 22px; }
+    .sched-table { font-size: 0.78rem; }
+    .sched-table th, .sched-table td { padding: 9px 5px; }
+    .sched-table td.time { font-size: 1rem; }
+    .foot-bottom { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <a href="#top" class="brand" aria-label="CT2 Two Brothers Combat Academy home">
+    <span class="mark">CT2</span>
+    <span class="name">TWO BROTHERS<small>CT2 · COMBAT ACADEMY</small></span>
+  </a>
+  <nav class="links" id="navlinks">
+    <a href="#disciplines">Modalidades</a>
+    <a href="#masters">Mestres</a>
+    <a href="#why">Por que aqui</a>
+    <a href="#schedule">Horários</a>
+    <a href="#location">Localização</a>
+  </nav>
+  <div class="nav-cta">
+    <a class="btn btn-red" href="https://wa.me/5500000000000" target="_blank" rel="noopener" style="padding:0.7em 1.2em;font-size:0.82rem;">Aula Grátis</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="photo-layer"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="badge-trial reveal"><span class="pulse"></span>Primeira Aula Grátis · Sem Compromisso</div>
+        <h1 class="reveal d1">Campeões São<span class="accent">Forjados Aqui</span></h1>
+        <p class="lead reveal d2">Jiu-Jitsu brasileiro de elite e treino de combate construídos sobre disciplina, domínio e evolução sem trégua. Pise no tatame. Torne-se imparável.</p>
+        <div class="hero-actions reveal d3">
+          <a class="btn btn-wa" href="https://wa.me/5500000000000" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.2 0 4.27.86 5.82 2.41a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24Zm-2.6 4.55c-.16-.36-.33-.37-.48-.38l-.41-.01c-.14 0-.37.05-.57.27-.2.21-.75.73-.75 1.79s.77 2.08.88 2.22c.11.14 1.5 2.29 3.64 3.21.51.22.91.35 1.22.45.51.16.98.14 1.35.08.41-.06 1.27-.52 1.45-1.02.18-.5.18-.93.13-1.02-.05-.09-.2-.14-.41-.25-.21-.11-1.27-.63-1.46-.7-.2-.07-.34-.11-.48.11-.14.21-.55.7-.68.84-.12.14-.25.16-.46.05-.21-.11-.9-.33-1.71-1.05-.63-.56-1.06-1.26-1.18-1.47-.12-.21-.01-.32.09-.43.1-.1.21-.25.32-.38.11-.14.14-.23.21-.38.07-.14.04-.27-.02-.38-.05-.11-.47-1.18-.65-1.61Z"/></svg>
+            Fale conosco no WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="#disciplines">Ver Modalidades</a>
+        </div>
+        <div class="hero-meta reveal d4">
+          <div class="stat"><div class="n">12<span>+</span></div><div class="l">Competidores Ativos</div></div>
+          <div class="stat"><div class="n">6</div><div class="l">Modalidades</div></div>
+          <div class="stat"><div class="n">500<span>+</span></div><div class="l">Alunos Formados</div></div>
+        </div>
+      </div>
+      <div class="hero-poster reveal d2">
+        <div class="seal"><div class="seal-inner"><b>ELITE</b><em>ACADEMIA</em></div></div>
+        <div class="ph"><span class="ph-label">Foto de treino — destaque</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DISCIPLINES ================= -->
+<section class="slab darker hex-bg cut-top" id="disciplines">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">O Arsenal</span>
+      <h2 class="section-title">Modalidades Que Forjamos</h2>
+      <p class="lead">Seis sistemas de combate. Um único padrão: entrega total. Treine a arte que te chama — ou domine todas.</p>
+    </div>
+    <div class="disc-grid">
+      <div class="disc-card featured reveal">
+        <span class="tag">Modalidade em Destaque</span>
+        <div class="disc-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40c4-10 14-16 14-16M40 40c-4-10-14-16-14-16M24 24l-6-6m6 6 6-6M18 18l-4-8 10 4 10-4-4 8"/><circle cx="24" cy="14" r="3"/></svg>
+        </div>
+        <h3>Jiu-Jitsu Brasileiro</h3>
+        <p>A arte suáve que desmonta o mais forte. Alavancagem, técnica e domínio no solo — a base de tudo o que construímos. Com kimono e sem kimono, do iniciante à faixa-preta.</p>
+      </div>
+      <div class="disc-card reveal d1">
+        <span class="num">02</span>
+        <div class="disc-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10v12a8 8 0 0 0 16 0V10M14 10h20M20 32v8h8v-8"/><path d="M16 40h16"/></svg></div>
+        <h3>Muay Thai</h3>
+        <p>A arte das oito armas. Golpes devastadores com punhos, cotovelos, joelhos e canelas.</p>
+      </div>
+      <div class="disc-card reveal d2">
+        <span class="num">03</span>
+        <div class="disc-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 28c4-6 10-8 14-8s10 2 14 8M16 20l-4-8M32 20l4-8M20 28v10M28 28v10"/></svg></div>
+        <h3>Wrestling</h3>
+        <p>Quedas, controle e raça. Dite onde a luta vai acontecer.</p>
+      </div>
+      <div class="disc-card reveal d3">
+        <span class="num">04</span>
+        <div class="disc-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l16 9v18l-16 9-16-9V15z"/><path d="M24 6v18M24 24l16-9M24 24L8 15"/></svg></div>
+        <h3>MMA</h3>
+        <p>Onde todas as distâncias se encontram. Trocação, clinch e solo em um lutador completo.</p>
+      </div>
+      <div class="disc-card reveal d2">
+        <span class="num">05</span>
+        <div class="disc-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="20" r="7"/><circle cx="34" cy="26" r="6"/><path d="M9 20H4M40 26h4"/></svg></div>
+        <h3>Boxe</h3>
+        <p>A nobre arte. Trabalho de pés, esquiva e mãos cirúrgicas.</p>
+      </div>
+      <div class="disc-card reveal d3">
+        <span class="num">06</span>
+        <div class="disc-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24h6l4-10 8 20 4-10h8"/><path d="M40 24h2"/></svg></div>
+        <h3>Condicionamento</h3>
+        <p>Força funcional preparada para a guerra. O motor por trás de cada técnica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSTRUCTORS ================= -->
+<section class="slab dark hex-bg" id="masters">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">A Linhagem</span>
+      <h2 class="section-title">Conheça Nossos Mestres</h2>
+      <p class="lead">Competidores premiados e instrutores certificados que ainda perseguem a próxima faixa. Eles não só ensinam o caminho — eles trilham. <em style="color:var(--gray-dim);font-style:normal;">Passe o mouse sobre o card para ver a ficha.</em></p>
+    </div>
+    <div class="masters-grid">
+      <article class="master reveal">
+        <span class="belt-flag">Faixa-Preta · 3º Grau</span>
+        <div class="ph"><span class="ph-label">Foto do instrutor</span></div>
+        <div class="info">
+          <div class="role">Professor Titular · BJJ</div>
+          <h3>[ Nome ]</h3>
+          <div class="belt">Faixa-Preta — 3º Grau</div>
+          <ul class="achievements">
+            <li>Campeão Estadual 2022 · Copa São Paulo de Jiu-Jitsu</li>
+            <li>2× Medalhista Pan No-Gi IBJJF</li>
+            <li>15+ anos de tatame</li>
+          </ul>
+        </div>
+      </article>
+      <article class="master reveal d1">
+        <span class="belt-flag">Muay Thai · Kru</span>
+        <div class="ph"><span class="ph-label">Foto do instrutor</span></div>
+        <div class="info">
+          <div class="role">Professor de Trocação</div>
+          <h3>[ Nome ]</h3>
+          <div class="belt">Kru — Instrutor Certificado</div>
+          <ul class="achievements">
+            <li>Campeão Regional de Muay Thai 2021</li>
+            <li>Treinou em Bangkok · circuito Lumpinee</li>
+            <li>8 lutas profissionais</li>
+          </ul>
+        </div>
+      </article>
+      <article class="master reveal d2">
+        <span class="belt-flag">MMA · Profissional</span>
+        <div class="ph"><span class="ph-label">Foto do instrutor</span></div>
+        <div class="info">
+          <div class="role">MMA &amp; Wrestling</div>
+          <h3>[ Nome ]</h3>
+          <div class="belt">Lutador Profissional Ativo</div>
+          <ul class="achievements">
+            <li>Cartel profissional de MMA 9–2</li>
+            <li>Finalista Nacional de Wrestling Livre</li>
+            <li>Certificado em força e condicionamento</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section class="slab darker hex-bg" id="why">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow center">Sem Atalhos</span>
+      <h2 class="section-title">Por Que Treinar Aqui</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-cell reveal">
+        <div class="why-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4l5 10 11 1-8 8 2 11-10-6-10 6 2-11-8-8 11-1z"/></svg></div>
+        <h3>Método Comprovado</h3>
+        <p>Um sistema de alta performance que forma competidores — estruturado, progressivo, sem repetição à toa.</p>
+      </div>
+      <div class="why-cell reveal d1">
+        <div class="why-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4l16 7v10c0 10-7 17-16 21-9-4-16-11-16-21V11z"/><path d="M17 24l5 5 9-11"/></svg></div>
+        <h3>Professores Certificados</h3>
+        <p>Competidores ativos e instrutores certificados. Você aprende com quem ainda está na luta.</p>
+      </div>
+      <div class="why-cell reveal d2">
+        <div class="why-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="14" r="7"/><path d="M10 40c0-8 6-13 14-13s14 5 14 13"/></svg></div>
+        <h3>Ambiente Seguro</h3>
+        <p>Um tatame controlado e respeitoso para toda idade e nível. Intensidade com zero ego.</p>
+      </div>
+      <div class="why-cell reveal d3">
+        <div class="why-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="16" r="5"/><circle cx="34" cy="16" r="5"/><path d="M4 40c0-6 4-10 10-10s10 4 10 10M24 40c0-6 4-10 10-10s10 4 10 10"/></svg></div>
+        <h3>Adultos · Kids · Iniciantes</h3>
+        <p>Programas dedicados para cada lutador — da faixa-branca de primeiro dia ao competidor experiente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="slab dark hex-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Direto do Tatame</span>
+      <h2 class="section-title">O Que Dizem os Lutadores</h2>
+    </div>
+    <div class="quote-grid">
+      <div class="quote reveal">
+        <span class="mark">&ldquo;</span>
+        <p>Cheguei sem aguentar um round sequer. Oito meses depois, subi ao pódio no meu primeiro campeonato. Aqui não se vende academia — se forma lutador.</p>
+        <div class="who"><span class="avatar"></span><div><div class="nm">Marcos R.</div><div class="dur">Treina há 8 meses</div></div></div>
+      </div>
+      <div class="quote reveal d1">
+        <span class="mark">&ldquo;</span>
+        <p>Os professores te cobram exatamente na medida que você precisa. Minha disciplina fora do tatame mudou tanto quanto meu jogo dentro dele. Melhor decisão que tomei.</p>
+        <div class="who"><span class="avatar"></span><div><div class="nm">Letícia K.</div><div class="dur">Treina há 2 anos</div></div></div>
+      </div>
+      <div class="quote reveal d2">
+        <span class="mark">&ldquo;</span>
+        <p>Meu filho começou aqui aos sete anos, com medo de tudo. Hoje é focado, confiante e respeitoso. O programa infantil é algo que todo pai deveria conhecer.</p>
+        <div class="who"><span class="avatar"></span><div><div class="nm">Daniel S.</div><div class="dur">Pai de aluno · 1,5 ano</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCHEDULE ================= -->
+<section class="slab darker hex-bg" id="schedule">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Apareça</span>
+      <h2 class="section-title">Horários da Semana</h2>
+      <p class="lead">Tatame aberto seis dias por semana. Escolha seu horário — a primeira aula é por nossa conta.</p>
+    </div>
+    <div class="sched-tabs reveal d1" id="schedTabs">
+      <button class="sched-tab active" data-f="all">Todas as Aulas</button>
+      <button class="sched-tab" data-f="bjj">Jiu-Jitsu</button>
+      <button class="sched-tab" data-f="muay">Muay Thai</button>
+      <button class="sched-tab" data-f="mma">MMA</button>
+    </div>
+    <div class="reveal d2" style="overflow-x:auto;">
+      <table class="sched-table" id="schedTable">
+        <thead>
+          <tr><th>Horário</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="time">06:30</td>
+            <td><span class="cls bjj" data-c="bjj">BJJ</span></td>
+            <td><span class="cls muay" data-c="muay">Muay Thai</span></td>
+            <td><span class="cls bjj" data-c="bjj">BJJ</span></td>
+            <td><span class="cls muay" data-c="muay">Muay Thai</span></td>
+            <td><span class="cls bjj" data-c="bjj">BJJ</span></td>
+            <td><span class="cls empty">—</span></td>
+          </tr>
+          <tr>
+            <td class="time">12:00</td>
+            <td><span class="cls bjj" data-c="bjj">No-Gi</span></td>
+            <td><span class="cls mma" data-c="mma">MMA</span></td>
+            <td><span class="cls bjj" data-c="bjj">No-Gi</span></td>
+            <td><span class="cls mma" data-c="mma">MMA</span></td>
+            <td><span class="cls bjj" data-c="bjj">No-Gi</span></td>
+            <td><span class="cls bjj" data-c="bjj">Open Mat</span></td>
+          </tr>
+          <tr>
+            <td class="time">17:30</td>
+            <td><span class="cls mma" data-c="mma">Kids</span></td>
+            <td><span class="cls bjj" data-c="bjj">BJJ Kids</span></td>
+            <td><span class="cls mma" data-c="mma">Kids</span></td>
+            <td><span class="cls bjj" data-c="bjj">BJJ Kids</span></td>
+            <td><span class="cls mma" data-c="mma">Kids</span></td>
+            <td><span class="cls empty">—</span></td>
+          </tr>
+          <tr>
+            <td class="time">19:00</td>
+            <td><span class="cls bjj" data-c="bjj">BJJ</span></td>
+            <td><span class="cls muay" data-c="muay">Muay Thai</span></td>
+            <td><span class="cls mma" data-c="mma">MMA</span></td>
+            <td><span class="cls muay" data-c="muay">Muay Thai</span></td>
+            <td><span class="cls bjj" data-c="bjj">BJJ</span></td>
+            <td><span class="cls empty">—</span></td>
+          </tr>
+          <tr>
+            <td class="time">20:30</td>
+            <td><span class="cls mma" data-c="mma">MMA</span></td>
+            <td><span class="cls bjj" data-c="bjj">BJJ Avan.</span></td>
+            <td><span class="cls muay" data-c="muay">Clinch</span></td>
+            <td><span class="cls bjj" data-c="bjj">BJJ Avan.</span></td>
+            <td><span class="cls mma" data-c="mma">Sparring</span></td>
+            <td><span class="cls empty">—</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOCATION ================= -->
+<section class="slab darker hex-bg" id="location" style="padding-top:0;padding-bottom:0;">
+  <div class="loc-grid">
+    <div class="loc-info reveal">
+      <span class="eyebrow">Encontre o Tatame</span>
+      <h2 class="section-title" style="font-size:clamp(2.2rem,5vw,3.6rem);margin:16px 0 8px;">Treine Com a Gente</h2>
+      <div class="addr">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <div class="t"><b>CT2 Two Brothers</b>[ Rua e Número ], [ Bairro ]<br/>[ Cidade ] — [ Estado ], [ CEP ]</div>
+      </div>
+      <div class="addr">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div class="t"><b>Horário de Funcionamento</b>Seg–Sex 06:00–22:00 · Sáb 09:00–14:00</div>
+      </div>
+      <a class="btn btn-wa" href="https://wa.me/5500000000000" target="_blank" rel="noopener" style="margin-top:14px;">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.2 0 4.27.86 5.82 2.41a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24Zm-2.6 4.55c-.16-.36-.33-.37-.48-.38l-.41-.01c-.14 0-.37.05-.57.27-.2.21-.75.73-.75 1.79s.77 2.08.88 2.22c.11.14 1.5 2.29 3.64 3.21.51.22.91.35 1.22.45.51.16.98.14 1.35.08.41-.06 1.27-.52 1.45-1.02.18-.5.18-.93.13-1.02-.05-.09-.2-.14-.41-.25-.21-.11-1.27-.63-1.46-.7-.2-.07-.34-.11-.48.11-.14.21-.55.7-.68.84-.12.14-.25.16-.46.05-.21-.11-.9-.33-1.71-1.05-.63-.56-1.06-1.26-1.18-1.47-.12-.21-.01-.32.09-.43.1-.1.21-.25.32-.38.11-.14.14-.23.21-.38.07-.14.04-.27-.02-.38-.05-.11-.47-1.18-.65-1.61Z"/></svg>
+        Agende sua aula grátis
+      </a>
+    </div>
+    <div class="map-wrap reveal d1">
+      <iframe title="Localização da academia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=S%C3%A3o+Paulo+Brazil&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="final-cta hex-bg">
+  <div class="wrap">
+    <span class="eyebrow center reveal">A Hora É Agora</span>
+    <h2 class="reveal d1">Comece Hoje —<br/><span class="gold">Aula Grátis</span></h2>
+    <p class="lead reveal d2">Sem experiência necessária. Sem equipamento. Basta aparecer disposto a trabalhar. Seu primeiro passo para se tornar um lutador está a uma mensagem de distância.</p>
+    <div class="reveal d3" style="display:flex;justify-content:center;">
+      <a class="btn btn-wa" href="https://wa.me/5500000000000" target="_blank" rel="noopener" style="font-size:1.1rem;padding:1.2em 2.2em;">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.2 0 4.27.86 5.82 2.41a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24Zm-2.6 4.55c-.16-.36-.33-.37-.48-.38l-.41-.01c-.14 0-.37.05-.57.27-.2.21-.75.73-.75 1.79s.77 2.08.88 2.22c.11.14 1.5 2.29 3.64 3.21.51.22.91.35 1.22.45.51.16.98.14 1.35.08.41-.06 1.27-.52 1.45-1.02.18-.5.18-.93.13-1.02-.05-.09-.2-.14-.41-.25-.21-.11-1.27-.63-1.46-.7-.2-.07-.34-.11-.48.11-.14.21-.55.7-.68.84-.12.14-.25.16-.46.05-.21-.11-.9-.33-1.71-1.05-.63-.56-1.06-1.26-1.18-1.47-.12-.21-.01-.32.09-.43.1-.1.21-.25.32-.38.11-.14.14-.23.21-.38.07-.14.04-.27-.02-.38-.05-.11-.47-1.18-.65-1.61Z"/></svg>
+        Fale conosco no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand" style="margin-bottom:18px;">
+          <span class="mark">CT2</span>
+          <span class="name">TWO BROTHERS<small>CT2 · COMBAT ACADEMY</small></span>
+        </a>
+        <p style="color:var(--gray);max-width:34ch;margin-top:14px;font-weight:400;">Jiu-Jitsu brasileiro de elite &amp; esportes de combate. Feito para quem se recusa a desistir.</p>
+      </div>
+      <div class="foot-tagline">Não espere o momento certo.<br/><span>A hora é agora.</span></div>
+      <div>
+        <p style="font-weight:600;letter-spacing:0.16em;text-transform:uppercase;font-size:0.78rem;color:var(--gray);margin-bottom:14px;">Siga a evolução</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.5-.45-5.18a2.6 2.6 0 0 0-1.83-1.84C18.96 4.5 12 4.5 12 4.5s-6.96 0-8.72.48A2.6 2.6 0 0 0 1.45 6.82C1 8.5 1 12 1 12s0 3.5.45 5.18a2.6 2.6 0 0 0 1.83 1.84C5.04 19.5 12 19.5 12 19.5s6.96 0 8.72-.48a2.6 2.6 0 0 0 1.83-1.84C23 15.5 23 12 23 12ZM10 15.5v-7l6 3.5Z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.3 2.3 1.7 4 4 4.2v2.8c-1.4.1-2.8-.3-4-1v6.3a5.8 5.8 0 1 1-5.8-5.8c.3 0 .6 0 .9.05v2.9a2.9 2.9 0 1 0 2 2.75V3z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CT2 Two Brothers Combat Academy. Todos os direitos reservados.</span>
+      <span>[ Rua e Número ] · [ Cidade ] — [ Estado ]</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= FLOATING WHATSAPP ================= -->
+<a class="wa-float" href="https://wa.me/5500000000000" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+  <span class="ring"></span>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.2 0 4.27.86 5.82 2.41a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24Zm-2.6 4.55c-.16-.36-.33-.37-.48-.38l-.41-.01c-.14 0-.37.05-.57.27-.2.21-.75.73-.75 1.79s.77 2.08.88 2.22c.11.14 1.5 2.29 3.64 3.21.51.22.91.35 1.22.45.51.16.98.14 1.35.08.41-.06 1.27-.52 1.45-1.02.18-.5.18-.93.13-1.02-.05-.09-.2-.14-.41-.25-.21-.11-1.27-.63-1.46-.7-.2-.07-.34-.11-.48.11-.14.21-.55.7-.68.84-.12.14-.25.16-.46.05-.21-.11-.9-.33-1.71-1.05-.63-.56-1.06-1.26-1.18-1.47-.12-.21-.01-.32.09-.43.1-.1.21-.25.32-.38.11-.14.14-.23.21-.38.07-.14.04-.27-.02-.38-.05-.11-.47-1.18-.65-1.61Z"/></svg>
+</a>
+
+<script>
+  // nav scroll state
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navlinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // schedule filter
+  const tabs = document.getElementById('schedTabs');
+  const cells = document.querySelectorAll('#schedTable .cls');
+  tabs.addEventListener('click', (e) => {
+    const btn = e.target.closest('.sched-tab');
+    if (!btn) return;
+    tabs.querySelectorAll('.sched-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.f;
+    cells.forEach(c => {
+      if (c.classList.contains('empty')) return;
+      const match = (f === 'all' || c.dataset.c === f);
+      c.style.opacity = match ? '1' : '0.15';
+      c.style.filter = match ? 'none' : 'grayscale(1)';
+    });
+  });
+</script>
+<!-- selo de demonstracao (injetado pelo portfolio) -->
+<style>
+.labs-demo-flag{position:fixed;left:14px;bottom:14px;z-index:2147483647;display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:rgba(16,16,18,.82);color:#fff;font:500 11px/1.35 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.02em;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.16);box-shadow:0 4px 16px rgba(0,0,0,.28);transition:background .2s,transform .2s}
+.labs-demo-flag:hover{background:rgba(16,16,18,.95);transform:translateY(-1px)}
+.labs-demo-flag::before{content:"";width:6px;height:6px;border-radius:50%;background:#f5a524;flex:none}
+@media print{.labs-demo-flag{display:none}}
+</style>
+<a id="labs-demo-flag" class="labs-demo-flag" href="/labs" title="Voltar para a galeria de projetos">Projeto fict&iacute;cio &middot; demonstra&ccedil;&atilde;o</a>
+<script>if(window.self!==window.top){var f=document.getElementById("labs-demo-flag");if(f)f.remove();document.querySelectorAll(".reveal").forEach(function(e){if(!e.closest(".mobile-menu,.mobile-nav,.modal-overlay,.mobile-drawer,[hidden]")){e.classList.add("in","visible");}});}</script>
+</body>
+</html>

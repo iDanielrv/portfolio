@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dra. Carolina Mendes — Odontologia de Excelência</title>
+  <meta name="description" content="Dra. Carolina Mendes — Odontologia estética e implantodontia de excelência. Sorrisos que transformam vidas. Agende sua consulta.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pure-white: #FFFFFF;
+      --off-white: #F8FAFC;
+      --ice: #EEF2F7;
+      --slate: #64748B;
+      --navy: #0F172A;
+      --navy-light: #1E293B;
+      --teal: #0D9488;
+      --teal-light: #14B8A6;
+      --gold: #C9A96E;
+      --gold-light: #D4B87A;
+      --mist: #94A3B8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--pure-white);
+      color: var(--navy);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 24px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav.scrolled {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      padding: 14px 56px;
+      box-shadow: 0 1px 0 rgba(15,23,42,0.04);
+    }
+
+    .nav.scrolled .logo,
+    .nav.scrolled .nav-link { color: var(--navy); }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--pure-white);
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+
+    .logo span {
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--pure-white);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.4s;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      width: 0; height: 1.5px;
+      background: var(--teal);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: var(--teal-light); }
+
+    .nav-cta {
+      padding: 12px 28px;
+      background: var(--teal);
+      color: var(--pure-white);
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s;
+      border-radius: 2px;
+    }
+
+    .nav-cta:hover {
+      background: var(--teal-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(13,148,136,0.2);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1920&q=80') center/cover no-repeat;
+      animation: kenburns 25s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+
+    @keyframes kenburns {
+      0% { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.1) translate(-1%, -1%); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(15,23,42,0.75) 0%,
+        rgba(15,23,42,0.5) 50%,
+        rgba(15,23,42,0.85) 100%
+      );
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: var(--pure-white);
+      max-width: 850px;
+      padding: 0 32px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      color: var(--teal-light);
+      opacity: 0;
+      animation: fadeUp 1.2s 0.4s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1.4s 0.7s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold-light);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 auto 44px;
+      opacity: 0;
+      animation: fadeUp 1.2s 1s forwards;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 1s 1.3s forwards;
+    }
+
+    .hero-btn-primary {
+      padding: 16px 40px;
+      background: var(--teal);
+      color: var(--pure-white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .hero-btn-primary:hover {
+      background: var(--teal-light);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 50px rgba(13,148,136,0.3);
+    }
+
+    .hero-btn-secondary {
+      padding: 16px 40px;
+      background: transparent;
+      color: var(--pure-white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.35);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.5s;
+    }
+
+    .hero-btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--pure-white);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeUp 1s 2s forwards;
+    }
+
+    .scroll-hint span {
+      font-size: 0.6rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .scroll-hint-line {
+      width: 1px;
+      height: 56px;
+      background: linear-gradient(to bottom, var(--teal-light), transparent);
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 120px 56px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .section-title em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--teal);
+    }
+
+    /* ===== ABOUT ===== */
+    .about-section { background: var(--off-white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 580px;
+      object-fit: cover;
+      transition: all 0.8s;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.03);
+    }
+
+    .about-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--teal);
+      transform: translate(20px, 20px);
+      pointer-events: none;
+      opacity: 0.15;
+      border-radius: 4px;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--slate);
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+
+    .about-credentials {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 36px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(13,148,136,0.15);
+    }
+
+    .credential {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .credential-icon {
+      width: 40px; height: 40px;
+      border: 1px solid var(--teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .credential-text {
+      font-size: 0.9rem;
+      color: var(--navy);
+      font-weight: 500;
+    }
+
+    .credential-sub {
+      font-size: 0.78rem;
+      color: var(--slate);
+      font-weight: 300;
+    }
+
+    /* ===== TREATMENTS ===== */
+    .treatments-section { background: var(--pure-white); }
+
+    .treatments-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .treatment-card {
+      background: var(--off-white);
+      border: 1px solid rgba(15,23,42,0.04);
+      border-radius: 8px;
+      padding: 44px 28px;
+      text-align: center;
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .treatment-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--teal);
+      transform: scaleX(0);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .treatment-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .treatment-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(15,23,42,0.06);
+      border-color: rgba(13,148,136,0.1);
+    }
+
+    .treatment-icon {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .treatment-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--navy);
+    }
+
+    .treatment-desc {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--slate);
+      font-weight: 300;
+      margin-bottom: 18px;
+    }
+
+    .treatment-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--teal);
+    }
+
+    .treatment-price span {
+      font-size: 0.8rem;
+      color: var(--slate);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+    }
+
+    /* ===== TECHNOLOGY ===== */
+    .tech-section {
+      background: var(--navy);
+      color: var(--pure-white);
+      padding: 120px 56px;
+    }
+
+    .tech-section .section-eyebrow { color: var(--teal-light); }
+    .tech-section .section-title { color: var(--pure-white); }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .tech-card {
+      padding: 40px 32px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      transition: all 0.5s;
+      text-align: center;
+    }
+
+    .tech-card:hover {
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(13,148,136,0.2);
+      transform: translateY(-4px);
+    }
+
+    .tech-icon {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    .tech-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .tech-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--mist);
+      font-weight: 300;
+    }
+
+    /* ===== BEFORE/AFTER ===== */
+    .results-section { background: var(--off-white); }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .result-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      cursor: pointer;
+    }
+
+    .result-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: all 0.6s;
+    }
+
+    .result-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .result-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,23,42,0.8) 0%, transparent 55%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+    }
+
+    .result-treatment {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--pure-white);
+      margin-bottom: 4px;
+    }
+
+    .result-patient {
+      font-size: 0.78rem;
+      color: var(--teal-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .result-badge {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: var(--teal);
+      color: var(--pure-white);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-section { background: var(--pure-white); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 44px 32px;
+      transition: all 0.5s;
+      position: relative;
+      border: 1px solid rgba(15,23,42,0.04);
+    }
+
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 32px; right: 32px;
+      height: 3px;
+      background: var(--teal);
+      opacity: 0;
+      transition: opacity 0.4s;
+      border-radius: 0 0 3px 3px;
+    }
+
+    .testimonial-card:hover::before { opacity: 1; }
+
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(15,23,42,0.05);
+    }
+
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-bottom: 18px;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--navy-light);
+      margin-bottom: 28px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .testimonial-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--ice);
+    }
+
+    .testimonial-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .testimonial-role {
+      font-size: 0.75rem;
+      color: var(--slate);
+      font-weight: 300;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      padding: 100px 56px;
+      background: var(--teal);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, transparent 60%);
+      animation: rotate-slow 30s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotate-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      color: var(--pure-white);
+      margin-bottom: 16px;
+    }
+
+    .cta-title em { font-style: italic; font-weight: 500; }
+
+    .cta-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      font-weight: 300;
+    }
+
+    .cta-btn {
+      padding: 18px 48px;
+      background: var(--pure-white);
+      color: var(--navy);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.5s;
+      display: inline-block;
+    }
+
+    .cta-btn:hover {
+      background: var(--navy);
+      color: var(--pure-white);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 50px rgba(15,23,42,0.2);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy);
+      color: var(--pure-white);
+      padding: 80px 56px 40px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span {
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .footer-tagline {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--mist);
+      margin-bottom: 40px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      margin-bottom: 40px;
+    }
+
+    .footer-links a {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mist);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--teal-light); }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.2);
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ===== BOOKING MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--pure-white);
+      width: 100%;
+      max-width: 560px;
+      padding: 56px 48px;
+      position: relative;
+      border-radius: 8px;
+      transform: translateY(30px) scale(0.97);
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 40px 80px rgba(15,23,42,0.15);
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      width: 40px; height: 40px;
+      border: 1px solid rgba(15,23,42,0.08);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .modal-close:hover {
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .modal-close:hover svg { stroke: var(--pure-white); }
+
+    .modal-close svg {
+      width: 16px; height: 16px;
+      stroke: var(--navy);
+      transition: stroke 0.3s;
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .modal-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .modal-header p {
+      font-size: 0.85rem;
+      color: var(--slate);
+      font-weight: 300;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    .form-label {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(15,23,42,0.08);
+      background: var(--off-white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--navy);
+      outline: none;
+      transition: all 0.3s;
+      border-radius: 6px;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(13,148,136,0.08);
+    }
+
+    .form-input::placeholder { color: var(--slate); font-weight: 300; }
+
+    .form-select {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--teal);
+      color: var(--pure-white);
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 8px;
+      border-radius: 6px;
+      transition: all 0.4s;
+    }
+
+    .form-submit:hover {
+      background: var(--teal-light);
+      letter-spacing: 3px;
+    }
+
+    /* ===== MOBILE ===== */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-menu-btn svg {
+      width: 24px; height: 24px;
+      stroke: var(--pure-white);
+    }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+
+    .mobile-nav.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--pure-white);
+      text-decoration: none;
+    }
+
+    .mobile-nav-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-nav-close svg {
+      width: 28px; height: 28px;
+      stroke: var(--pure-white);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+      50% { opacity: 0.8; transform: scaleY(1); }
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .treatments-grid { grid-template-columns: repeat(2, 1fr); }
+      .tech-grid { grid-template-columns: repeat(2, 1fr); }
+      .results-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .section { padding: 80px 24px; }
+      .tech-section { padding: 80px 24px; }
+      .cta-section { padding: 80px 24px; }
+      .treatments-grid,
+      .tech-grid,
+      .results-grid,
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .hero-cta-group { flex-direction: column; align-items: center; }
+      .nav { padding: 20px 24px; }
+      .nav.scrolled { padding: 12px 24px; }
+      .modal { padding: 48px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer { padding: 60px 24px 32px; }
+      .about-image img { height: 400px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="navbar">
+    <a href="#" class="logo">Dra. Carolina <span>Mendes</span></a>
+    <div class="nav-links">
+      <a href="#about" class="nav-link">Sobre</a>
+      <a href="#treatments" class="nav-link">Tratamentos</a>
+      <a href="#technology" class="nav-link">Tecnologia</a>
+      <a href="#results" class="nav-link">Resultados</a>
+      <button class="nav-cta" onclick="openModal()">Agendar</button>
+    </div>
+    <button class="mobile-menu-btn" onclick="openMobileNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="closeMobileNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <a href="#about" onclick="closeMobileNav()">Sobre</a>
+    <a href="#treatments" onclick="closeMobileNav()">Tratamentos</a>
+    <a href="#technology" onclick="closeMobileNav()">Tecnologia</a>
+    <a href="#results" onclick="closeMobileNav()">Resultados</a>
+    <a href="#" onclick="closeMobileNav(); openModal(); return false;">Agendar</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Odontologia de Excelência</p>
+      <h1 class="hero-title">Sorrisos que<br>transformam <em>vidas</em></h1>
+      <p class="hero-desc">Tecnologia de ponta, atendimento humanizado e resultados que superam expectativas. Sua jornada para o sorriso perfeito começa aqui.</p>
+      <div class="hero-cta-group">
+        <button class="hero-btn-primary" onclick="openModal()">Agendar Consulta</button>
+        <a href="#treatments" class="hero-btn-secondary">Conhecer Tratamentos</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Descer</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about-section" id="about">
+    <div class="about-grid">
+      <div class="about-image reveal">
+        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=80" alt="Dra. Carolina Mendes">
+      </div>
+      <div class="about-text reveal">
+        <p class="section-eyebrow">A Doutora</p>
+        <h2 class="section-title">Dra. Carolina<br><em>Mendes</em></h2>
+        <p>Com mais de 15 anos de experiência, a Dra. Carolina Mendes é referência em odontologia estética e implantodontia. Formada pela USP e com especializações em Harvard e na Universidade de Zurique, ela combina ciência rigorosa com sensibilidade artística.</p>
+        <p>Seu consultório foi projetado para oferecer o máximo de conforto e tecnologia. Cada detalhe — desde a iluminação ambiente até o aroma do espaço — foi pensado para transformar a experiência odontológica em algo prazeroso.</p>
+        <div class="about-credentials">
+          <div class="credential">
+            <div class="credential-icon">🎓</div>
+            <div>
+              <div class="credential-text">Doutorado em Odontologia — USP</div>
+              <div class="credential-sub">Especialização em Implantodontia — Harvard</div>
+            </div>
+          </div>
+          <div class="credential">
+            <div class="credential-icon">🏆</div>
+            <div>
+              <div class="credential-text">Membro da Academia Americana de Odontologia</div>
+              <div class="credential-sub">Certificação internacional em Estética Dental</div>
+            </div>
+          </div>
+          <div class="credential">
+            <div class="credential-icon">✨</div>
+            <div>
+              <div class="credential-text">+3.000 sorrisos transformados</div>
+              <div class="credential-sub">15 anos de experiência clínica</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TREATMENTS -->
+  <section class="section treatments-section" id="treatments">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Nossos Tratamentos</p>
+      <h2 class="section-title">Cuidado em cada<br><em>especialidade</em></h2>
+    </div>
+    <div class="treatments-grid">
+      <div class="treatment-card reveal">
+        <span class="treatment-icon">🦷</span>
+        <h3 class="treatment-name">Implantodontia</h3>
+        <p class="treatment-desc">Implantes de titânio com tecnologia 3D. Recupere a função e estética do seu sorriso de forma definitiva.</p>
+        <div class="treatment-price">R$ 3.500 <span>por implante</span></div>
+      </div>
+      <div class="treatment-card reveal">
+        <span class="treatment-icon">✨</span>
+        <h3 class="treatment-name">Clareamento Dental</h3>
+        <p class="treatment-desc">Tecnologia LED avançada com resultados imediatos. Até 8 tons mais brancos em uma única sessão.</p>
+        <div class="treatment-price">R$ 1.200 <span>sessão completa</span></div>
+      </div>
+      <div class="treatment-card reveal">
+        <span class="treatment-icon">😁</span>
+        <h3 class="treatment-name">Facetas em Porcelana</h3>
+        <p class="treatment-desc">Lentes de contato dental ultra finas. Transforme seu sorriso com naturalidade e durabilidade.</p>
+        <div class="treatment-price">R$ 2.800 <span>por faceta</span></div>
+      </div>
+      <div class="treatment-card reveal">
+        <span class="treatment-icon">🦷</span>
+        <h3 class="treatment-name">Ortodontia Invisível</h3>
+        <p class="treatment-desc">Alinhadores transparentes removíveis. Resultado perfeito sem ninguém perceber que você está tratando.</p>
+        <div class="treatment-price">R$ 12.000 <span>tratamento completo</span></div>
+      </div>
+      <div class="treatment-card reveal">
+        <span class="treatment-icon">🦷</span>
+        <h3 class="treatment-name">Prótese Protocolo</h3>
+        <p class="treatment-desc">Reabilitação total do sorriso em 24 horas. Sorria no mesmo dia da cirurgia com confiança total.</p>
+        <div class="treatment-price">R$ 35.000 <span>arco completo</span></div>
+      </div>
+      <div class="treatment-card reveal">
+        <span class="treatment-icon">🦷</span>
+        <h3 class="treatment-name">Tratamento de Canal</h3>
+        <p class="treatment-desc">Endodontia moderna com anestesia digital. Procedimento indolor e com taxa de sucesso de 98%.</p>
+        <div class="treatment-price">R$ 1.800 <span>por canal</span></div>
+      </div>
+      <div class="treatment-card reveal">
+        <span class="treatment-icon">🦷</span>
+        <h3 class="treatment-name">Restauração Estética</h3>
+        <p class="treatment-desc">Resina composta de alta performance. Cor, brilho e textura idênticos ao dente natural.</p>
+        <div class="treatment-price">R$ 450 <span>por dente</span></div>
+      </div>
+      <div class="treatment-card reveal">
+        <span class="treatment-icon">🦷</span>
+        <h3 class="treatment-name">Limpeza Profissional</h3>
+        <p class="treatment-desc">Remoção de tártaro e placa bacteriana com ultrassom. Prevenção e saúde bucal em primeiro lugar.</p>
+        <div class="treatment-price">R$ 280 <span>por sessão</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY -->
+  <section class="tech-section" id="technology">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Tecnologia</p>
+      <h2 class="section-title">Excelência em cada<br><em>detalhe</em></h2>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card reveal">
+        <div class="tech-icon">📐</div>
+        <h3 class="tech-title">Scanner Intraoral 3D</h3>
+        <p class="tech-desc">Moldagem digital precisa em segundos. Sem gesso, sem desconforto, sem erro humano.</p>
+      </div>
+      <div class="tech-card reveal">
+        <div class="tech-icon">💉</div>
+        <h3 class="tech-title">Anestesia Digital</h3>
+        <p class="tech-desc">Aplicação computadorizada sem dor. Controle exato da dose para máximo conforto.</p>
+      </div>
+      <div class="tech-card reveal">
+        <div class="tech-icon">🔬</div>
+        <h3 class="tech-title">Microscópio Cirúrgico</h3>
+        <p class="tech-desc">Precisão milimétrica em todos os procedimentos. Resultados previsíveis e duradouros.</p>
+      </div>
+      <div class="tech-card reveal">
+        <div class="tech-icon">🖥️</div>
+        <h3 class="tech-title">Tomografia 3D</h3>
+        <p class="tech-desc">Imagens de alta definição para planejamento preciso de implantes e cirurgias.</p>
+      </div>
+      <div class="tech-card reveal">
+        <div class="tech-icon">✨</div>
+        <h3 class="tech-title">Laser Terapêutico</h3>
+        <p class="tech-desc">Tratamentos indolores com cicatrização acelerada. Tecnologia de última geração.</p>
+      </div>
+      <div class="tech-card reveal">
+        <div class="tech-icon">🪑</div>
+        <h3 class="tech-title">Consultório Humanizado</h3>
+        <p class="tech-desc">Ambiente acolhedor com aromaterapia, música personalizada e cadeiras ergonômicas premium.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section results-section" id="results">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Transformações</p>
+      <h2 class="section-title">Sorrisos que<br>contam <em>histórias</em></h2>
+    </div>
+    <div class="results-grid">
+      <div class="result-card reveal">
+        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=500&q=80" alt="Clareamento">
+        <div class="result-overlay">
+          <div class="result-treatment">Clareamento + Restaurações</div>
+          <div class="result-patient">Ana Paula, 34 anos</div>
+        </div>
+        <div class="result-badge">Estética</div>
+      </div>
+      <div class="result-card reveal">
+        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=500&q=80" alt="Implantes">
+        <div class="result-overlay">
+          <div class="result-treatment">Prótese Protocolo Superior</div>
+          <div class="result-patient">Ricardo, 52 anos</div>
+        </div>
+        <div class="result-badge">Reabilitação</div>
+      </div>
+      <div class="result-card reveal">
+        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=500&q=80" alt="Facetas">
+        <div class="result-overlay">
+          <div class="result-treatment">Facetas em Porcelana</div>
+          <div class="result-patient">Mariana, 29 anos</div>
+        </div>
+        <div class="result-badge">Estética</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials-section" id="testimonials">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Depoimentos</p>
+      <h2 class="section-title">O que nossos<br>pacientes <em>dizem</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Tinha pavor de dentista desde criança. A Dra. Carolina transformou isso completamente. O consultório é um spa, o tratamento é indolor e o resultado é incrível."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Fernanda" class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Fernanda Lima</div>
+            <div class="testimonial-role">Implante + Clareamento</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Fiz o tratamento de canal e nem senti a anestesia sendo aplicada. A tecnologia digital faz toda a diferença. Recomendo de olhos fechados."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Pedro" class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Pedro Almeida</div>
+            <div class="testimonial-role">Tratamento de Canal</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Minhas facetas ficaram perfeitas. Parecem dentes naturais, só que melhores. A Dra. Carolina tem um olhar artístico que faz toda a diferença."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Juliana" class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Juliana Costa</div>
+            <div class="testimonial-role">Facetas em Porcelana</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-content reveal">
+      <h2 class="cta-title">Sua primeira consulta<br>é <em>gratuita</em></h2>
+      <p class="cta-desc">Avaliação completa com scanner 3D, planejamento digital do seu sorriso e orçamento personalizado. Sem compromisso, sem pressão.</p>
+      <button class="cta-btn" onclick="openModal()">Agendar Avaliação Gratuita</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">Dra. Carolina <span>Mendes</span></div>
+    <p class="footer-tagline">"A beleza de um sorriso começa com a saúde dele."</p>
+    <div class="footer-links">
+      <a href="#about">Sobre</a>
+      <a href="#treatments">Tratamentos</a>
+      <a href="#technology">Tecnologia</a>
+      <a href="#results">Resultados</a>
+      <a href="#" onclick="openModal(); return false;">Agendar</a>
+    </div>
+    <p class="footer-copy">© 2026 Dra. Carolina Mendes. Todos os direitos reservados. CRO-SP 12345</p>
+  </footer>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="modal-header">
+        <h2>Agende Sua Consulta</h2>
+        <p>Avaliação gratuita com planejamento digital</p>
+      </div>
+      <form onsubmit="event.preventDefault(); closeModal(); alert('Consulta agendada com sucesso! Nossa equipe entrará em contato para confirmar.');">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome</label>
+            <input type="text" class="form-input" placeholder="Nome completo" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Telefone</label>
+            <input type="tel" class="form-input" placeholder="(11) 99999-9999" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" placeholder="seu@email.com" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Tratamento de interesse</label>
+            <select class="form-select" required>
+              <option value="">Selecione...</option>
+              <option value="implante">Implantodontia</option>
+              <option value="clareamento">Clareamento Dental</option>
+              <option value="faceta">Facetas em Porcelana</option>
+              <option value="ortodontia">Ortodontia Invisível</option>
+              <option value="protocolo">Prótese Protocolo</option>
+              <option value="canal">Tratamento de Canal</option>
+              <option value="restauracao">Restauração Estética</option>
+              <option value="limpeza">Limpeza Profissional</option>
+              <option value="avaliacao">Avaliação Geral</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Data preferida</label>
+            <input type="date" class="form-input" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Horário preferido</label>
+          <select class="form-select" required>
+            <option value="">Selecione...</option>
+            <option value="manha">Manhã (9h - 12h)</option>
+            <option value="tarde">Tarde (13h - 17h)</option>
+            <option value="noite">Noite (17h - 20h)</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">Confirmar Agendamento</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Modal
+    function openModal() {
+      document.getElementById('bookingModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('bookingModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('bookingModal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+
+    // Mobile Nav
+    function openMobileNav() {
+      document.getElementById('mobileNav').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      document.getElementById('mobileNav').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeMobileNav();
+      }
+    });
+  </script>
+
+<!-- selo de demonstracao (injetado pelo portfolio) -->
+<style>
+.labs-demo-flag{position:fixed;left:14px;bottom:14px;z-index:2147483647;display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:rgba(16,16,18,.82);color:#fff;font:500 11px/1.35 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.02em;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.16);box-shadow:0 4px 16px rgba(0,0,0,.28);transition:background .2s,transform .2s}
+.labs-demo-flag:hover{background:rgba(16,16,18,.95);transform:translateY(-1px)}
+.labs-demo-flag::before{content:"";width:6px;height:6px;border-radius:50%;background:#f5a524;flex:none}
+@media print{.labs-demo-flag{display:none}}
+</style>
+<a id="labs-demo-flag" class="labs-demo-flag" href="/labs" title="Voltar para a galeria de projetos">Projeto fict&iacute;cio &middot; demonstra&ccedil;&atilde;o</a>
+<script>if(window.self!==window.top){var f=document.getElementById("labs-demo-flag");if(f)f.remove();document.querySelectorAll(".reveal").forEach(function(e){if(!e.closest(".mobile-menu,.mobile-nav,.modal-overlay,.mobile-drawer,[hidden]")){e.classList.add("in","visible");}});}</script>
+</body>
+</html>

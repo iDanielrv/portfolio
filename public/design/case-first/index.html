@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Direção 01 — Case-first · Daniel RV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper:   #E8EAED;
+    --paper-2: #DCDFE4;
+    --ink:     #11151A;
+    --ink-2:   #4E5762;
+    --rule:    #C3C8CF;
+    --signal:  #0F3DDE;
+    --f-display: 'Instrument Serif', Georgia, serif;
+    --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+    --f-mono:    'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  a { color: inherit; }
+
+  /* ---------- topo ---------- */
+  .bar {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--rule);
+  }
+  .mark { font-family: var(--f-mono); font-size: 13px; letter-spacing: .04em; font-weight: 500; }
+  .bar nav { display: flex; gap: 26px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .bar nav a { color: var(--ink-2); text-decoration: none; }
+  .bar nav a:hover { color: var(--signal); }
+
+  /* ---------- hero: a tese ---------- */
+  .hero { padding: 92px 0 76px; border-bottom: 1px solid var(--rule); }
+  .hero h1 {
+    margin: 0; font-family: var(--f-display); font-weight: 400;
+    font-size: clamp(40px, 6.6vw, 84px); line-height: 1.02; letter-spacing: -.02em;
+    max-width: 15ch;
+  }
+  .hero h1 em { font-style: italic; color: var(--signal); }
+  .hero .facts {
+    display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 34px 0 0;
+    font-family: var(--f-mono); font-size: 12.5px; color: var(--ink-2);
+  }
+  .hero .facts b { color: var(--ink); font-weight: 500; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 40px 0 0; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 13px 22px; border: 1px solid var(--ink);
+    font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em;
+    text-transform: uppercase; text-decoration: none; transition: .18s;
+  }
+  .btn.solid { background: var(--ink); color: var(--paper); }
+  .btn.solid:hover { background: var(--signal); border-color: var(--signal); }
+  .btn.ghost:hover { border-color: var(--signal); color: var(--signal); }
+
+  /* ---------- casos ---------- */
+  .sec-label {
+    display: flex; align-items: center; gap: 16px; padding: 54px 0 8px;
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--ink-2);
+  }
+  .sec-label::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+  .case {
+    display: grid; grid-template-columns: 64px 1fr 300px; gap: 32px;
+    align-items: start; padding: 40px 0; border-bottom: 1px solid var(--rule);
+  }
+  .case-num { font-family: var(--f-mono); font-size: 12px; color: var(--signal); padding-top: 6px; }
+  .case h2 {
+    margin: 0 0 4px; font-family: var(--f-display); font-weight: 400;
+    font-size: 30px; line-height: 1.12; letter-spacing: -.015em;
+  }
+  .case .role { font-family: var(--f-mono); font-size: 12px; color: var(--ink-2); letter-spacing: .04em; }
+  .case p { margin: 16px 0 0; max-width: 54ch; color: #2B333C; }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; }
+  .stack span {
+    font-family: var(--f-mono); font-size: 11px; padding: 4px 9px;
+    background: var(--paper-2); border: 1px solid var(--rule);
+  }
+  .result { border-left: 2px solid var(--signal); padding: 2px 0 2px 18px; }
+  .result .big {
+    display: block; font-family: var(--f-display); font-size: 46px;
+    line-height: 1; letter-spacing: -.02em;
+  }
+  .result .cap {
+    display: block; margin-top: 8px; font-family: var(--f-mono);
+    font-size: 11.5px; line-height: 1.55; color: var(--ink-2);
+  }
+  .todo {
+    display: inline-block; font-family: var(--f-mono); font-size: 11px;
+    padding: 3px 8px; background: #FFF3C4; border: 1px dashed #B08900; color: #6B5200;
+  }
+
+  /* ---------- currículo comprimido ---------- */
+  .strip { padding: 44px 0 76px; }
+  .strip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+  .strip h3 {
+    margin: 0 0 14px; font-family: var(--f-mono); font-size: 11px;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); font-weight: 500;
+  }
+  .strip ul { margin: 0; padding: 0; list-style: none; font-size: 14.5px; }
+  .strip li { padding: 5px 0; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 12px; }
+  .strip li span { color: var(--ink-2); font-family: var(--f-mono); font-size: 12px; }
+
+  /* ---------- selo ---------- */
+  #flag {
+    position: fixed; left: 14px; bottom: 14px; z-index: 999;
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 13px; border-radius: 999px; background: var(--ink); color: var(--paper);
+    font-family: var(--f-mono); font-size: 11px; text-decoration: none;
+  }
+  #flag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--signal); }
+
+  @media (max-width: 860px) {
+    .case { grid-template-columns: 40px 1fr; }
+    .result { grid-column: 2; }
+    .strip-grid { grid-template-columns: 1fr; gap: 28px; }
+    .bar nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="bar">
+    <div class="mark">DANIEL RIPPER VITORINO</div>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#cv">Résumé</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Four years shipping software that <em>stayed</em> shipped.</h1>
+    <div class="facts">
+      <span><b>Fullstack</b> · React, Next.js, Node, Nest.js</span>
+      <span><b>GMT-3</b> · overlap with US Eastern</span>
+      <span><b>Available</b> as contractor (PJ)</span>
+    </div>
+    <div class="cta">
+      <a class="btn solid" href="#work">See the work</a>
+      <a class="btn ghost" href="#cv">Download CV (PDF)</a>
+    </div>
+  </section>
+
+  <div class="sec-label" id="work">Selected work</div>
+
+  <article class="case">
+    <div class="case-num">01</div>
+    <div>
+      <h2>Hybriun — custom software, end to end</h2>
+      <div class="role">Fullstack Developer · 2024 — Present · Remote</div>
+      <p>
+        Requirements gathering through post-go-live support on multiple production
+        projects at once. Built a reusable component layer that became the default
+        starting point for new interfaces.
+      </p>
+      <div class="stack"><span>Nest.js</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Prisma</span><span>MySQL</span></div>
+    </div>
+    <div class="result">
+      <span class="big">~30%</span>
+      <span class="cap">less delivery time on new interfaces, from the shared component layer</span>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="case-num">02</div>
+    <div>
+      <h2>Hyundai Autoever — internal corporate systems</h2>
+      <div class="role">Fullstack Developer · 2022 — 2024</div>
+      <p>
+        Internal tooling for corporate users in an environment with structured QA,
+        code review and Git Flow. Integrated third-party REST APIs and internal
+        microservices to modernise manual operational steps.
+      </p>
+      <div class="stack"><span>Vue.js</span><span>Node.js</span><span>Express</span><span>MongoDB</span></div>
+    </div>
+    <div class="result">
+      <span class="big">—</span>
+      <span class="cap"><span class="todo">falta a métrica</span> quantos usuários? quanto tempo economizado por processo?</span>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="case-num">03</div>
+    <div>
+      <h2>Labs — five storefront studies</h2>
+      <div class="role">Self-directed · art direction &amp; front-end</div>
+      <p>
+        Landing pages for Brazilian local businesses: butcher, pet shop, café,
+        barbershop, martial arts gym. Hand-written HTML and CSS, no framework.
+      </p>
+      <div class="stack"><span>HTML</span><span>CSS</span><span>SVG</span><span>Design</span></div>
+    </div>
+    <div class="result">
+      <span class="big">5</span>
+      <span class="cap">complete pages, each a different art direction — the visual range on display</span>
+    </div>
+  </article>
+
+  <section class="strip" id="cv">
+    <div class="sec-label" style="padding-top:34px">Résumé, in brief</div>
+    <div class="strip-grid">
+      <div>
+        <h3>Stack</h3>
+        <ul>
+          <li>TypeScript <span>daily</span></li>
+          <li>React / Next.js <span>daily</span></li>
+          <li>Node / Nest.js <span>daily</span></li>
+          <li>MySQL / Prisma <span>daily</span></li>
+          <li>Vue.js / MongoDB <span>prior role</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Education</h3>
+        <ul>
+          <li>BSc Computer Science <span>exp. 2026</span></li>
+          <li>Faculdade de Americana <span>FAM</span></li>
+        </ul>
+        <h3 style="margin-top:24px">Languages</h3>
+        <ul>
+          <li>Portuguese <span>native</span></li>
+          <li>English <span>advanced</span></li>
+        </ul>
+      </div>
+      <div id="contact">
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:danielrippervitorino@gmail.com" style="text-decoration:none">Email</a> <span>gmail</span></li>
+          <li><a href="https://github.com/iDanielrv" style="text-decoration:none">GitHub</a> <span>iDanielrv</span></li>
+          <li><a href="https://www.linkedin.com/in/daniel-ripperv" style="text-decoration:none">LinkedIn</a> <span>daniel-ripperv</span></li>
+          <li>Americana, SP <span>Brazil</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<a id="flag" href="/design">Direção 1 · Case-first</a>
+<script>if(window.self!==window.top){var f=document.getElementById("flag");if(f)f.remove();}</script>
+</body>
+</html>

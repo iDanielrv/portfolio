@@ -1,0 +1,63 @@
+import Link from "next/link";
+import { labs, labsCopy, labUrl, t, withCount } from "@/lib/labs";
+import "./labs.css";
+
+export default function LabsPage() {
+  return (
+    <main className="labs-page">
+      <div className="labs-wrap">
+        <Link className="labs-back" href="/">
+          <span aria-hidden="true">←</span> {t(labsCopy.back)}
+        </Link>
+
+        <header className="labs-head">
+          <p className="labs-eyebrow">{t(labsCopy.eyebrow)}</p>
+          <h1 className="labs-title">
+            {t(labsCopy.titleLead)} <em>{t(labsCopy.titleAccent)}</em>
+          </h1>
+          <p className="labs-lede">{withCount(labsCopy.lede)}</p>
+          <p className="labs-note">{t(labsCopy.note)}</p>
+        </header>
+
+        <div className="labs-grid">
+          {labs.map((lab, i) => (
+            <a
+              key={lab.slug}
+              className={`labs-card labs-rise${lab.featured ? " is-featured" : ""}`}
+              style={{ animationDelay: `${i * 90}ms` }}
+              href={labUrl(lab)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="labs-bar">
+                <span className="labs-path">/labs/{lab.slug}</span>
+                <span className="labs-open">
+                  {t(labsCopy.open)} <span aria-hidden="true">→</span>
+                </span>
+              </div>
+
+              <div className="labs-frame">
+                <iframe
+                  src={labUrl(lab)}
+                  title={`${t(labsCopy.previewAlt)} ${lab.name}`}
+                  loading="lazy"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  sandbox="allow-scripts"
+                />
+              </div>
+
+              <div className="labs-body">
+                <span className="labs-seg">{t(lab.segment)}</span>
+                <h2 className="labs-name">{lab.name}</h2>
+                <p className="labs-blurb">{t(lab.blurb)}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <p className="labs-foot">{withCount(labsCopy.foot)}</p>
+      </div>
+    </main>
+  );
+}

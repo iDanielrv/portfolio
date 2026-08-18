@@ -1,0 +1,335 @@
+/* Galeria /labs — mesma direção Case-first da home (app/portfolio.css) */
+
+.labs-page {
+  --paper:   #E8EAED;
+  --paper-2: #DCDFE4;
+  --paper-3: #F2F3F5;
+  --ink:     #11151A;
+  --ink-2:   #2B333C;
+  --ink-3:   #4E5762;
+  --rule:    #C3C8CF;
+  --signal:  #0F3DDE;
+  --caution: #B08900;
+
+  --f-display: "Instrument Serif", Georgia, serif;
+  --f-body: "IBM Plex Sans", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  min-height: 100vh;
+  min-width: 0;
+  padding: 0 0 96px;
+}
+
+body:has(.labs-page) {
+  background: #e8eaed;
+}
+
+.labs-wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+  min-width: 0;
+}
+
+/* ---------- topo ---------- */
+
+.labs-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 26px 0 0;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.labs-back:hover,
+.labs-back:focus-visible {
+  color: var(--signal);
+}
+.labs-back span {
+  transition: transform 0.2s;
+}
+.labs-back:hover span {
+  transform: translateX(-4px);
+}
+
+/* ---------- cabeçalho ---------- */
+
+.labs-head {
+  padding: 72px 0 52px;
+  max-width: 660px;
+}
+
+.labs-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.labs-eyebrow::before {
+  content: "";
+  width: 40px;
+  height: 1px;
+  background: var(--rule);
+}
+
+.labs-title {
+  margin: 22px 0 0;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 6.4vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.labs-title em {
+  font-style: italic;
+  color: var(--signal);
+}
+
+.labs-lede {
+  margin: 24px 0 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.labs-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 26px 0 0;
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+.labs-note::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--caution);
+}
+
+/* ---------- grade ---------- */
+
+.labs-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
+  min-width: 0;
+}
+
+/* ---------- card ---------- */
+
+.labs-card {
+  --z: 0.58;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-3);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.labs-card:hover {
+  border-color: var(--signal);
+  transform: translateY(-3px);
+}
+.labs-card:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-color: var(--signal);
+}
+
+/* barra com o caminho real do arquivo */
+.labs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-2);
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.labs-path {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.labs-open {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.25s;
+}
+.labs-card:hover .labs-open,
+.labs-card:focus-visible .labs-open {
+  color: var(--signal);
+}
+.labs-open span {
+  transition: transform 0.25s;
+}
+.labs-card:hover .labs-open span {
+  transform: translateX(4px);
+}
+
+/* prévia ao vivo: a própria página, escalada */
+.labs-frame {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.labs-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% / var(--z));
+  /* piso de altura lógica: overlays com position:fixed precisam de um
+     viewport realista para ficarem fora de vista */
+  height: max(calc(100% / var(--z)), 800px);
+  border: 0;
+  transform: scale(var(--z));
+  transform-origin: 0 0;
+  pointer-events: none;
+  transition: transform 3.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.labs-card:hover .labs-frame iframe,
+.labs-card:focus-visible .labs-frame iframe {
+  transform: scale(var(--z)) translateY(-40%);
+}
+
+/* ---------- texto do card ---------- */
+
+.labs-body {
+  min-width: 0;
+  padding: 22px 20px 24px;
+}
+.labs-seg {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+.labs-name {
+  margin: 12px 0 0;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.labs-blurb {
+  margin: 10px 0 0;
+  max-width: 54ch;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+/* ---------- rodapé ---------- */
+
+.labs-foot {
+  margin: 56px 0 0;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--rule);
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+
+/* ---------- entrada ---------- */
+
+.labs-rise {
+  animation: labs-rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@keyframes labs-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- responsivo ---------- */
+
+@media (min-width: 720px) {
+  .labs-wrap {
+    padding: 0 40px;
+  }
+  .labs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .labs-card {
+    --z: 0.44;
+  }
+  .labs-card.is-featured {
+    --z: 0.86;
+    grid-column: 1 / -1;
+  }
+  .labs-card.is-featured .labs-frame {
+    aspect-ratio: 16 / 8.2;
+  }
+  .labs-card.is-featured .labs-name {
+    font-size: 2rem;
+  }
+  .labs-card.is-featured .labs-body {
+    padding: 26px 26px 30px;
+  }
+}
+
+/* ---------- preferências do usuário ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .labs-rise {
+    animation: none;
+  }
+  .labs-card,
+  .labs-card:hover,
+  .labs-frame iframe,
+  .labs-open span,
+  .labs-back span {
+    transition: none;
+    transform: none;
+  }
+  .labs-card:hover .labs-frame iframe,
+  .labs-card:focus-visible .labs-frame iframe {
+    transform: scale(var(--z));
+  }
+}
