@@ -44,6 +44,11 @@ export function labUrl(lab: Lab): string {
   return lab.url ?? `/labs/${lab.slug}/index.html`;
 }
 
+/** Retrato estatico da previa, gerado por scripts/make-posters.mjs. */
+export function labPoster(lab: Lab): string {
+  return `/labs/posters/${lab.slug}.webp`;
+}
+
 /** O mesmo caminho, sem o index.html — é o que a barra do card mostra. */
 export function labPath(lab: Lab): string {
   return labUrl(lab).replace(/\/index\.html$/, "");

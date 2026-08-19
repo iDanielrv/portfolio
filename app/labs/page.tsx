@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { labs, labsCopy, labPath, labUrl, t, withCount } from "@/lib/labs";
+import { labs, labsCopy, labPath, labPoster, labUrl, t, withCount } from "@/lib/labs";
+import { LabPreview } from "./LabPreview";
 import "./labs.css";
 
 export default function LabsPage() {
@@ -36,16 +37,12 @@ export default function LabsPage() {
                 </span>
               </div>
 
-              <div className="labs-frame">
-                <iframe
-                  src={labUrl(lab)}
-                  title={`${t(labsCopy.previewAlt)} ${lab.name}`}
-                  loading="lazy"
-                  tabIndex={-1}
-                  aria-hidden="true"
-                  sandbox="allow-scripts"
-                />
-              </div>
+              <LabPreview
+                src={labUrl(lab)}
+                poster={labPoster(lab)}
+                title={`${t(labsCopy.previewAlt)} ${lab.name}`}
+                eager={lab.featured}
+              />
 
               <div className="labs-body">
                 <span className="labs-segline">

@@ -217,7 +217,7 @@ body:has(.labs-page) {
      não há salto de rolagem e não é preciso contain-intrinsic-size. */
   content-visibility: auto;
 }
-.labs-frame iframe {
+.labs-frame .labs-live {
   position: absolute;
   top: 0;
   left: 0;
@@ -233,11 +233,32 @@ body:has(.labs-page) {
   pointer-events: none;
   transition: transform 3.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
-.labs-card:hover .labs-frame iframe,
-.labs-card:focus-visible .labs-frame iframe {
+.labs-card:hover .labs-frame .labs-live.is-loaded,
+.labs-card:focus-visible .labs-frame .labs-live.is-loaded {
   /* dividido por --z porque o translate acontece antes da escala:
      o resultado na tela é exatamente --pan pixels */
   transform: scale(var(--z)) translateY(calc(-1 * var(--pan) / var(--z)));
+}
+
+
+/* Retrato estático: fica sob o iframe e é tudo que carrega até o hover. */
+.labs-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* O iframe entra por cima só depois de carregado, para não piscar. */
+.labs-frame .labs-live {
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 3.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.labs-frame .labs-live.is-loaded {
+  opacity: 1;
 }
 
 /* ---------- texto do card ---------- */
@@ -354,14 +375,14 @@ body:has(.labs-page) {
   }
   .labs-card,
   .labs-card:hover,
-  .labs-frame iframe,
+  .labs-frame .labs-live,
   .labs-open span,
   .labs-back span {
     transition: none;
     transform: none;
   }
-  .labs-card:hover .labs-frame iframe,
-  .labs-card:focus-visible .labs-frame iframe {
+  .labs-card:hover .labs-frame .labs-live,
+  .labs-card:focus-visible .labs-frame .labs-live {
     transform: scale(var(--z));
   }
 }
