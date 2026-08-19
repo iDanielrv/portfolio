@@ -212,6 +212,10 @@ body:has(.labs-page) {
   aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--paper-2);
+  /* O navegador pula layout e pintura das prévias que estão fora da tela.
+     A aspect-ratio acima mantém a altura mesmo sob size containment, então
+     não há salto de rolagem e não é preciso contain-intrinsic-size. */
+  content-visibility: auto;
 }
 .labs-frame iframe {
   position: absolute;
